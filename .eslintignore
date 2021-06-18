@@ -1,0 +1,5 @@
+!.eslintrc.js
+lib/*.js
+dist/*.js
+config/*.js
+scripts/*.js
