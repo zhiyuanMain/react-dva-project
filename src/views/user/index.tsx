@@ -79,7 +79,7 @@ class User extends React.Component<UserProps, {}> {
     return (
       <div className={prefixCls}>
         <h1>{appName}</h1>
-        <SvgIcon icon="icon-chart" type="primary" />
+        <SvgIcon icon="icon-customer-service" type="primary" />
         <Input defaultValue="2"></Input>
         <h1>current Page id: {pageId || '**'}</h1>
         <Button type="primary" onClick={this.handleUpdateName}>
@@ -134,7 +134,7 @@ class User extends React.Component<UserProps, {}> {
             return (
               <li key={key}>
                 <span style={{ display: 'inline-block', width: 170 }}>{key}</span>:{' '}
-                {JSON.stringify((globalConfigs as any)[key])}
+                {JSON.stringify(globalConfigs[key])}
               </li>
             )
           })}

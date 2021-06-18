@@ -51,4 +51,5 @@ const appModel: dvaRoot.DvaModel = {
     }
   }
 }
+
 export default appModel
