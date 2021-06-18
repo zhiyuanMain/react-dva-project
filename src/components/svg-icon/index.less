@@ -1,0 +1,34 @@
+@import '../../styles/theme.less';
+
+@prefixCls: sup-svg-icon;
+.@{prefixCls} {
+    width: 1em;
+    height: 1em;
+    margin-left: 2px;
+    margin-right: 2px;
+    vertical-align: middle;
+    fill: currentColor;
+    overflow: hidden;
+    transform: rotate(0deg);
+    transition: all .3s;
+    cursor: pointer;
+    
+    &-default {
+        color: @normal-color;   
+    }
+
+    &-primary,
+    &-active {
+        color: @primary-color;
+    }
+    &-danger {
+        color: @error-color;
+    }
+    &-success {
+        color: @success-color;
+    }
+    &-disabled {
+        color: @disabled-color !important;
+        cursor: not-allowed;
+    }
+}
