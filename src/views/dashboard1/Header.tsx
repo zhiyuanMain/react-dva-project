@@ -2,11 +2,10 @@ import React from 'react'
 import { Button } from 'antd'
 import { Link } from 'dva/router'
 import './Header.less'
-import withToken from 'src/hoc/withToken'
+import withToken, { WithToken } from 'src/hoc/withToken'
 
-interface HeaderProps {
+type HeaderProps = WithToken & {
   prefixCls?: string
-  myToken: string
 }
 
 const defaultProps = {

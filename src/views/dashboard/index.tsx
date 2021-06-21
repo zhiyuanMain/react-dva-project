@@ -1,25 +1,28 @@
 import React from 'react'
-import Header from './Header'
+import Header from './components/Header'
+import LogoRow from './components/LogoRow'
 import './index.less'
 
-type DashboardProps = {
+interface DashboardProps {
   prefixCls?: string
-} & Partial<DefaultProps>
-
-type DefaultProps = Readonly<typeof defaultProps>
-
-const defaultProps = {
-  prefixCls: 'dashboard-page'
 }
+class Dashboard extends React.Component<DashboardProps, {}> {
+  constructor(props: DashboardProps | Readonly<DashboardProps>) {
+    super(props)
+  }
 
-const Dashboard: React.FC<DashboardProps & DefaultProps> = (props) => (
-  <div className={props.prefixCls}>
-    <div className={`${props.prefixCls}__header sup-are-layout-ref__header`}>
-      <Header />
-    </div>
-  </div>
-)
+  static defaultProps = {
+    prefixCls: 'dashboard-page'
+  }
 
-Dashboard.defaultProps = { ...defaultProps }
+  render() {
+    return (
+      <div className={this.props.prefixCls}>
+        <Header />
+        <LogoRow />
+      </div>
+    )
+  }
+}
 
 export default Dashboard

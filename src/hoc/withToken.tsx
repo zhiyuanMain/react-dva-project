@@ -5,6 +5,8 @@ interface TokenProps {
   myToken: string
 }
 
+export type WithToken = TokenProps
+
 function withToken<P extends TokenProps>(Component: React.ComponentType<P>) {
   return class WrappingComponent extends React.Component<Subtract<P, TokenProps>> {
     render() {

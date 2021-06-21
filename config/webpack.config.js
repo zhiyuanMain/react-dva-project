@@ -127,10 +127,7 @@ module.exports = function(webpackEnv) {
             sourceMap: true,
             javascriptEnabled: true,
             modifyVars: {
-              'primary-color': '#a10de4',
-              'error-color': '#f1e50f',
-              'success-color': '#e43b0d',
-              'disabled-color': '#00190b'
+              'primary-color': '#215290'
             },
           },
         }
