@@ -1,0 +1,36 @@
+.dashboard-page-grouprow,
+.dashboard-page-onlinerow {
+    margin-top: 10px;
+
+    &__img {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        img {
+            display: block;
+            width: 230px;
+            height: 80px;
+            background-color: #fff;
+        }
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding-top: 10px;
+
+        &__block {
+            width: 50%;
+
+            &:first-child {
+                margin-right: 15px;
+                width: calc(50% - 15px);
+            }
+        }
+
+    }
+}

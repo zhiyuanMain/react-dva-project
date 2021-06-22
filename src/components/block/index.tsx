@@ -1,33 +1,14 @@
 import React from 'react'
+import Center from './Center'
+import Title from './Title'
 import './index.less'
 
-interface BlockProps {
+export interface BlockProps {
   prefixCls?: string
   style?: React.CSSProperties
 }
 
-// eslint-disable-next-line
-interface CenterProps extends BlockProps {}
-class Center extends React.Component<CenterProps, {}> {
-  constructor(props: {} | Readonly<BlockProps>) {
-    super(props)
-  }
-
-  static defaultProps = {
-    prefixCls: 'rc-center'
-  }
-
-  render() {
-    const { prefixCls, children, style = {} } = this.props
-    return (
-      <section className={prefixCls} style={style}>
-        {children}
-      </section>
-    )
-  }
+export default {
+  Center,
+  Title
 }
-
-const Block = {
-  Center
-}
-export default Block

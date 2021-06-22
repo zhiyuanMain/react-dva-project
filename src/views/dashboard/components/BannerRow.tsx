@@ -1,8 +1,10 @@
 import React from 'react'
 import { Carousel } from 'antd'
-import { Block } from 'src/components'
+import { Block, TabBox } from 'src/components'
 import banner1 from '../../../assets/img/banner1.png'
 import './BannerRow.less'
+import { TabItem } from 'src/components/tab-box'
+import { mockTabItem } from './_utils'
 
 type BannerListItem = {
   img: string
@@ -19,20 +21,30 @@ const BannerList: BannerListItem[] = [
   {
     img: banner1,
     title: '第二个title',
-    summary:
-      '新华社北京7月17日电 <br/><br/><br/><br/> 打卡的快乐撒加大打击啊送到家啦到家啊睡了多久啊'
+    summary: '新华社北京7月17日电 <br/><br/>打卡的快乐撒加大打击啊送到家啦到家啊睡了多久啊'
   },
   {
     img: banner1,
     title: '第三个title',
     summary:
-      '第三个summary 900 <br/><br/><br/><br/> mock datamock datamock datamock datamock datamock datamock datamock data'
+      '第三个summary 900 <br/><br/>mock datamock datamock datamock datamock datamock datamock datamock data'
   }
+]
+
+const TabLists: TabItem[] = [
+  { ...mockTabItem('要闻新闻') },
+  { ...mockTabItem('最新通知') },
+  { ...mockTabItem('区县动态') },
+  { ...mockTabItem('党风廉政') }
 ]
 interface BannerRowProps {
   prefixCls?: string
 }
-class BannerRow extends React.Component<BannerRowProps, {}> {
+
+interface BannerRowState {
+  currentCarouselIdx: number
+}
+class BannerRow extends React.Component<BannerRowProps, BannerRowState> {
   constructor(props: BannerRowProps | Readonly<BannerRowProps>) {
     super(props)
   }
@@ -41,18 +53,32 @@ class BannerRow extends React.Component<BannerRowProps, {}> {
     prefixCls: 'dashboard-page-bannerrow'
   }
 
+  state = {
+    currentCarouselIdx: 1
+  }
+
+  handleAfterChange = (current: number) => {
+    this.setState({
+      currentCarouselIdx: current + 1
+    })
+  }
   renderLeft = () => {
     const { prefixCls } = this.props
+    const { currentCarouselIdx } = this.state
     const wrapCls = `${prefixCls}__left`
     return (
       <div className={wrapCls}>
-        <Carousel autoplay>
+        <Carousel autoplay fade dots={false} afterChange={this.handleAfterChange}>
           {BannerList.map((item, index) => (
             <div className={`${wrapCls}__box`} key={index}>
               <img src={item.img} />
               <article>
                 <h1 dangerouslySetInnerHTML={{ __html: item.title }}></h1>
                 <h6 dangerouslySetInnerHTML={{ __html: item.summary }}></h6>
+                <dl>
+                  <dt>{currentCarouselIdx}</dt>
+                  <dd>/{BannerList.length}</dd>
+                </dl>
               </article>
             </div>
           ))}
@@ -61,11 +87,24 @@ class BannerRow extends React.Component<BannerRowProps, {}> {
     )
   }
 
+  renderRight = () => {
+    const { prefixCls } = this.props
+    const wrapCls = `${prefixCls}__right`
+    return (
+      <div className={wrapCls}>
+        <TabBox tabs={TabLists} />
+      </div>
+    )
+  }
+
   render() {
     const { prefixCls } = this.props
     return (
       <div className={prefixCls}>
-        <Block.Center>{this.renderLeft()}</Block.Center>
+        <Block.Center>
+          {this.renderLeft()}
+          {this.renderRight()}
+        </Block.Center>
       </div>
     )
   }

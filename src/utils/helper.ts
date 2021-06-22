@@ -7,3 +7,11 @@ import moment from 'moment'
 export const getToday = () => {
   return moment().format('YYYY/MM/DD dddd')
 }
+
+/**
+ * 获取今天
+ */
+
+export const getTodayYMD = () => {
+  return moment().format('YYYY/MM/DD')
+}

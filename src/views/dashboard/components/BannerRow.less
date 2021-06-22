@@ -1,10 +1,12 @@
 .dashboard-page-bannerrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 30px;
 
     &__left {
-        // display: flex;
-        // justify-content: space-between;
         width: 755px;
+        background-color: #fff;
 
         &__box {
             display: flex !important;
@@ -32,6 +34,7 @@
                 h1 {
                     font-size: 18px;
                     color: #383D43;
+                    padding: 20px 0;
                 }
 
                 h6 {
@@ -40,8 +43,35 @@
                     font-size: 14px;
                     color: #787E84;
                     text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+
+                dl {
+                    width: 100%;
+                    text-align: right;
+
+                    dt {
+                        display: inline;
+                        font-size: 20px;
+                        color: #262626;
+                        line-height: 28px;
+                    }
+
+                    dd {
+                        display: inline;
+                        font-size: 14px;
+                        color: #787E84;
+                        line-height: 28px;
+                    }
                 }
             }
         }
+    }
+
+    &__right {
+        width: 436px;
+        height: 360px;
+        padding: 14px 10px;
+        background-color: #fff;
     }
 }

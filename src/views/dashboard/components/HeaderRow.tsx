@@ -1,7 +1,7 @@
 import React from 'react'
 import { Block } from 'src/components'
 import { getToday } from 'src/utils/helper'
-import './Header.less'
+import './HeaderRow.less'
 
 interface HeaderProps {
   prefixCls?: string
@@ -12,7 +12,7 @@ class Header extends React.Component<HeaderProps, {}> {
   }
 
   static defaultProps = {
-    prefixCls: 'dashboard-page-header'
+    prefixCls: 'dashboard-page-headerrow'
   }
 
   render() {

@@ -1,0 +1,51 @@
+.suprc-panel-list {
+    &::after,
+    &::before {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 5px 0;
+
+    li {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0 5px 10px;
+        width: 100%;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 13px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: #C4C4C4;
+        }
+
+        > a {
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            word-break: break-all;
+            text-overflow: ellipsis;
+            line-height: 20px;
+            color: #383D43;
+        }
+
+        > .time {
+            display: block;
+            margin-left: 90px;
+            color: #787E84;
+        }
+    }
+}

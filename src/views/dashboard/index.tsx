@@ -1,8 +1,12 @@
 import React from 'react'
 import BannerRow from './components/BannerRow'
-import Header from './components/Header'
+import FooterRow from './components/FooterRow'
+import GroupRow from './components/GroupRow'
+import HeaderRow from './components/HeaderRow'
+import LinkRow from './components/LinkRow'
 import LogoRow from './components/LogoRow'
 import NavRow from './components/NavRow'
+import OnlineRow from './components/OnlineRow'
 import './index.less'
 
 interface DashboardProps {
@@ -20,10 +24,14 @@ class Dashboard extends React.Component<DashboardProps, {}> {
   render() {
     return (
       <div className={this.props.prefixCls}>
-        <Header />
+        <HeaderRow />
         <LogoRow />
         <NavRow />
         <BannerRow />
+        <GroupRow />
+        <OnlineRow />
+        <LinkRow />
+        <FooterRow />
       </div>
     )
   }
