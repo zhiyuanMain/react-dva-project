@@ -11,7 +11,7 @@ export default async (): Promise<GlobalConfigsRes> => {
     },
     token: ''
   }
-  console.info(globalConfigs)
+  // console.info(globalConfigs)
   return new Promise((resolve) => {
     // 这里可以做ReactDOM.render之前的所有准备工作
     appStore.dispatch({

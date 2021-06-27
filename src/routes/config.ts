@@ -3,6 +3,7 @@ import React from 'react'
 interface RouteArrItem {
   title?: string
   path: string
+  isDynamic?: boolean
   component: any
 }
 
@@ -19,6 +20,14 @@ const allRoutes: RouteItem[] = [
         path: '/dashboard',
         component: React.lazy(
           () => import(/* webpackChunkName: "page-dashboard" */ '../views/dashboard')
+        )
+      },
+      {
+        title: 'Channel',
+        isDynamic: true,
+        path: '/channel/:type',
+        component: React.lazy(
+          () => import(/* webpackChunkName: "page-channel" */ '../views/channel')
         )
       }
     ]

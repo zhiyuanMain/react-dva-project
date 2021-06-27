@@ -12,17 +12,20 @@ const NoMatch: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
 }
 
 const CreateRoutes: React.FC<RouteComponentProps> = ({ history }: RouteComponentProps) => {
-  const generateRoute: React.FC<RouteItem> = ({ layout, routes }: RouteProps & RouteItem) => {
+  const generateRoute: React.FC<RouteItem> = (
+    { layout, routes }: RouteProps & RouteItem,
+    index: number
+  ) => {
     const LayoutComponent = layout === 'basic' ? BasicLayout : React.Fragment
     return (
-      <LayoutComponent>
+      <LayoutComponent key={index}>
         {routes.map((item) => {
-          const { path, component: Component } = item
+          const { path, component: Component, isDynamic } = item
           return (
             <Route
               key={path}
               path={path}
-              exact
+              exact={!isDynamic}
               component={(props: RouteProps) => (
                 <Suspense fallback={<div />}>
                   <Component {...props} />
@@ -40,7 +43,7 @@ const CreateRoutes: React.FC<RouteComponentProps> = ({ history }: RouteComponent
       <React.Fragment>
         <Switch>
           <Redirect exact from="/" to="/dashboard" />
-          {allRoutes.map((item) => generateRoute(item))}
+          {allRoutes.map((item, index) => generateRoute(item, index))}
           <Route component={NoMatch} />
         </Switch>
       </React.Fragment>
