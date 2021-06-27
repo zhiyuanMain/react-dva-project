@@ -22,7 +22,7 @@ class Title extends React.Component<TitleProps, {}> {
     const { prefixCls, name, icon } = this.props
     return (
       <div className={prefixCls}>
-        <img src={require(`../../assets/img/${icon}.png`)} />
+        <img src={require(`src/assets/img/${icon}.png`)} />
         <h1>{name}</h1>
       </div>
     )

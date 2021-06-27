@@ -25,7 +25,7 @@ class GroupRow extends React.Component<GroupRowProps, {}> {
         {imgList.map((item, index) => (
           <li key={index}>
             <Link to="/">
-              <img src={require(`../../../assets/img/${item}-intro.png`)} />
+              <img src={require(`src/assets/img/intro-${item}.png`)} />
             </Link>
           </li>
         ))}

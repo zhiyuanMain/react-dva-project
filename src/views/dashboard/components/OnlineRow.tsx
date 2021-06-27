@@ -40,7 +40,7 @@ class OnlineRow extends React.Component<OnlineRowProps, {}> {
         {imgList.map((item, index) => (
           <li key={index}>
             <Link to="/">
-              <img src={require(`../../../assets/img/${item}-online.png`)} />
+              <img src={require(`src/assets/img/online-${item}.png`)} />
             </Link>
           </li>
         ))}

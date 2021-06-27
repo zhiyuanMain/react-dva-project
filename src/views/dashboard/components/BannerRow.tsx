@@ -1,7 +1,7 @@
 import React from 'react'
 import { Carousel } from 'antd'
 import { Block, TabBox } from 'src/components'
-import banner1 from '../../../assets/img/banner1.png'
+import banner1 from 'src/assets/img/banner1.png'
 import './BannerRow.less'
 import { TabItem } from 'src/components/tab-box'
 import { mockTabItem } from './_utils'

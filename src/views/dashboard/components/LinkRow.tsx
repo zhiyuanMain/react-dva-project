@@ -25,7 +25,7 @@ class LinkRow extends React.Component<LinkRowProps, {}> {
         {imgList.map((item, index) => (
           <li key={index}>
             <Link to="/">
-              <img src={require(`../../../assets/img/${item}-com.png`)} />
+              <img src={require(`src/assets/img/com-${item}.png`)} />
             </Link>
           </li>
         ))}

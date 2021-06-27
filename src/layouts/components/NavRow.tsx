@@ -27,7 +27,7 @@ class NavRow extends React.Component<NavRowProps, {}> {
   }
 
   static defaultProps = {
-    prefixCls: 'dashboard-page-navrow'
+    prefixCls: 'suprlc-navrow'
   }
 
   // eslint-disable-next-line
@@ -41,7 +41,7 @@ class NavRow extends React.Component<NavRowProps, {}> {
           <Menu
             className={`${prefixCls}__menu`}
             onClick={this.handleClick}
-            selectedKeys={[NavList[0].key]}
+            defaultSelectedKeys={[NavList[0].key]}
             mode="horizontal">
             {NavList.map((item) => (
               <Menu.Item key={item.key}>{item.title}</Menu.Item>

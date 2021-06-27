@@ -1,7 +1,7 @@
 import React from 'react'
 import { Input } from 'antd'
 import { Block } from 'src/components'
-import logo from '../../../assets/img/logo.png'
+import logo from 'src/assets/img/logo.png'
 import './LogoRow.less'
 
 const { Search } = Input
@@ -14,7 +14,7 @@ class LogoRow extends React.Component<LogoRowProps, {}> {
   }
 
   static defaultProps = {
-    prefixCls: 'dashboard-page-logorow'
+    prefixCls: 'suprlc-logorow'
   }
 
   handleSearch = (e: string) => {

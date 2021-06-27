@@ -1,27 +1,27 @@
 import React from 'react'
 
-export interface RouteArrItem {
+interface RouteArrItem {
   title?: string
   path: string
   component: any
 }
-const allRoutes = [
+
+export interface RouteItem {
+  layout: 'basic' | 'blank'
+  routes: RouteArrItem[]
+}
+const allRoutes: RouteItem[] = [
   {
-    title: 'Dashboard',
-    path: '/dashboard',
-    component: React.lazy(
-      () => import(/* webpackChunkName: "page-dashboard" */ '../views/dashboard')
-    )
-  },
-  {
-    title: 'User',
-    path: '/user',
-    component: React.lazy(() => import(/* webpackChunkName: "page-goods" */ '../views/user'))
-  },
-  {
-    title: 'Demo',
-    path: '/demo',
-    component: React.lazy(() => import(/* webpackChunkName: "page-demo" */ '../views/demo'))
+    layout: 'basic',
+    routes: [
+      {
+        title: 'Dashboard',
+        path: '/dashboard',
+        component: React.lazy(
+          () => import(/* webpackChunkName: "page-dashboard" */ '../views/dashboard')
+        )
+      }
+    ]
   }
 ]
 

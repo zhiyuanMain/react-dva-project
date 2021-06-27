@@ -21,7 +21,7 @@ class FooterRow extends React.Component<FooterRowProps, {}> {
 
     return (
       <div className={wrapCls}>
-        <img src={require('../../../assets/img/type.png')} />
+        <img src={require('src/assets/img/type.png')} />
         <article>
           <address>地址：榆林市兴榆路榆林农业大厦 主办单位</address>
           <p>E-mail：ylnyxxw@126.com 陕ICP备20005710 网站标识码：6108000013</p>
@@ -35,19 +35,19 @@ class FooterRow extends React.Component<FooterRowProps, {}> {
     const { prefixCls } = this.props
     const wrapCls = `${prefixCls}__right`
     const content = (
-      <img src={require('../../../assets/img/qrcode.png')} style={{ width: 120, height: 120 }} />
+      <img src={require('src/assets/img/qrcode.png')} style={{ width: 120, height: 120 }} />
     )
 
     return (
       <div className={wrapCls}>
         <section className={`${wrapCls}__wechat`}>
-          <img src={require('../../../assets/img/wechat.png')} />
+          <img src={require('src/assets/img/wechat.png')} />
           <p>欢迎关注</p>
           <p>官方微信公众号</p>
         </section>
         <section className={`${wrapCls}__qrcode`}>
           <Popover content={content}>
-            <img src={require('../../../assets/img/qrcode.png')} />
+            <img src={require('src/assets/img/qrcode.png')} />
           </Popover>
         </section>
       </div>

@@ -12,7 +12,7 @@ class Header extends React.Component<HeaderProps, {}> {
   }
 
   static defaultProps = {
-    prefixCls: 'dashboard-page-headerrow'
+    prefixCls: 'suprlc-headerrow'
   }
 
   render() {
