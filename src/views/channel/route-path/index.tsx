@@ -1,5 +1,6 @@
 import React from 'react'
-import { ChannelType } from 'src/constant/channel'
+import { ChannelContentType, ChannelType } from 'src/constant/channel'
+import Content from './Content'
 import './index.less'
 
 interface RoutePathProps {
@@ -15,8 +16,18 @@ class RoutePath extends React.Component<RoutePathProps, {}> {
     prefixCls: 'channel-page-route-path'
   }
 
+  renderContent = () => {
+    // 除了`市局概况、职能介绍`外，其他都是左右结构
+    const { type } = this.props
+    return type === 'cityBureauProfile' || type === 'functionIntroduction' ? (
+      <span>{type}</span>
+    ) : (
+      <Content key={type} type={type as ChannelContentType} />
+    )
+  }
+
   render() {
-    return <div>{this.props.type}</div>
+    return this.renderContent()
   }
 }
 

@@ -1,14 +1,15 @@
 import React from 'react'
 import TabBox, { TabItem } from 'src/components/tab-box'
+import { ChannelContentType } from 'src/constant/channel'
 import { mockTabItem } from 'src/views/dashboard/components/_utils'
 import './index.less'
 
 interface RankingProps {
   prefixCls?: string
+  type: ChannelContentType
 }
 
-const TabLists1: TabItem[] = [{ ...mockTabItem('总排行') }]
-const TabLists2: TabItem[] = [{ ...mockTabItem('月排行') }]
+const genTabLists = (title: string): TabItem[] => [{ ...mockTabItem(title, 5) }]
 
 class Ranking extends React.Component<RankingProps, {}> {
   constructor(props: RankingProps | Readonly<RankingProps>) {
@@ -21,14 +22,14 @@ class Ranking extends React.Component<RankingProps, {}> {
   }
 
   render() {
-    const { prefixCls } = this.props
+    const { prefixCls, type } = this.props
     return (
       <section className={prefixCls}>
         <div className={`${prefixCls}__block`}>
-          <TabBox tabs={TabLists1} />
+          <TabBox tabs={genTabLists(`${type} 总排行`)} textOverhidden={2} />
         </div>
         <div className={`${prefixCls}__block`}>
-          <TabBox tabs={TabLists2} />
+          <TabBox tabs={genTabLists(`${type} 月排行`)} textOverhidden={2} />
         </div>
       </section>
     )

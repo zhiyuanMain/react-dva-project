@@ -11,6 +11,7 @@ const channelList = tuple(
 )
 
 export type ChannelType = typeof channelList[number]
+export type ChannelContentType = Omit<ChannelType, 'cityBureauProfile' | 'functionIntroduction'>
 const CHANNEL_CONSTANTS = channelList.reduce(
   (prevVal, currentVal) => ({
     ...prevVal,
@@ -18,6 +19,5 @@ const CHANNEL_CONSTANTS = channelList.reduce(
   }),
   {} as { [key in ChannelType]: string }
 )
-console.log(CHANNEL_CONSTANTS)
 
 export default CHANNEL_CONSTANTS

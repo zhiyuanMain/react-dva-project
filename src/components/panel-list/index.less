@@ -11,6 +11,8 @@
     justify-content: flex-start;
     align-items: flex-start;
     padding: 5px 0;
+    width: 100%;
+    overflow: hidden;
 
     li {
         position: relative;
@@ -40,6 +42,9 @@
             text-overflow: ellipsis;
             line-height: 20px;
             color: #383D43;
+            &:hover {
+                color: #215290;
+            }
         }
 
         > .time {

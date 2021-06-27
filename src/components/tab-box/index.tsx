@@ -10,6 +10,7 @@ export interface TabItem {
 interface TabBoxProps {
   prefixCls?: string
   style?: React.CSSProperties
+  textOverhidden?: number
   tabs: TabItem[]
 }
 
@@ -19,17 +20,18 @@ class TabBox extends React.Component<TabBoxProps, {}> {
   }
 
   static defaultProps = {
-    prefixCls: 'suprc-tab-box'
+    prefixCls: 'suprc-tab-box',
+    textOverhidden: 1
   }
 
   render() {
-    const { prefixCls, tabs, style = {} } = this.props
+    const { prefixCls, tabs, style = {}, textOverhidden } = this.props
     return (
       <div className={prefixCls} style={style}>
         <Tabs defaultActiveKey="0" size="small">
           {tabs.map((item, index) => (
             <Tabs.TabPane tab={item.tabTitle} key={`${index}`}>
-              <PanelList list={item.list} />
+              <PanelList list={item.list} textOverhidden={textOverhidden} />
             </Tabs.TabPane>
           ))}
         </Tabs>

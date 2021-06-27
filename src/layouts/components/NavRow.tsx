@@ -47,7 +47,11 @@ class NavRow extends React.Component<NavRowProps, {}> {
             mode="horizontal">
             {NavList.map((item) => (
               <Menu.Item key={item.key}>
-                <Link to={`/channel/${item.key}`}>{item.title}</Link>
+                {item.key === 'dashboard' ? (
+                  <Link to={'/dashboard'}>{item.title}</Link>
+                ) : (
+                  <Link to={`/channel/${item.key}`}>{item.title}</Link>
+                )}
               </Menu.Item>
             ))}
           </Menu>

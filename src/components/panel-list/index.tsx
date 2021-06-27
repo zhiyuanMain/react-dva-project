@@ -12,6 +12,7 @@ interface PanelListProps {
   prefixCls?: string
   list: PanelListItem[]
   shouldRenderTime?: boolean
+  textOverhidden: number
 }
 
 class PanelList extends React.Component<PanelListProps, {}> {
@@ -21,16 +22,26 @@ class PanelList extends React.Component<PanelListProps, {}> {
 
   static defaultProps = {
     prefixCls: 'suprc-panel-list',
+    textOverhidden: 1,
     shouldRenderTime: false
   }
 
   render() {
-    const { prefixCls, list, shouldRenderTime } = this.props
+    const { prefixCls, list, shouldRenderTime, textOverhidden } = this.props
+    let liStyles = {}
+    if (textOverhidden > 1) {
+      liStyles = {
+        display: '-webkit-box',
+        '-webkit-box-orient': 'vertical',
+        '-webkit-line-clamp': `${textOverhidden}`,
+        'white-space': 'normal'
+      }
+    }
     return (
       <ul className={prefixCls}>
         {list.map((item) => (
           <li key={item.id}>
-            <Link title={item.title} to={item.url}>
+            <Link style={liStyles} title={item.title} to={item.url}>
               {item.title}
             </Link>
             {shouldRenderTime && <span className="time">{item.time}</span>}
