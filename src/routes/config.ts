@@ -29,6 +29,14 @@ const allRoutes: RouteItem[] = [
         component: React.lazy(
           () => import(/* webpackChunkName: "page-channel" */ '../views/channel')
         )
+      },
+      {
+        title: 'Article',
+        isDynamic: true,
+        path: '/article/:id',
+        component: React.lazy(
+          () => import(/* webpackChunkName: "page-article" */ '../views/article')
+        )
       }
     ]
   }

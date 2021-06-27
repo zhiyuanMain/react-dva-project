@@ -25,7 +25,7 @@ export function mockPanelList(title: string, len: number): PanelListItem[] {
   const listData: PanelListItem[] = []
   for (let index = 0; index < len; index++) {
     listData.push({
-      url: '/',
+      url: `/article/${index}`,
       id: `${index}`,
       title: new Array(index + 1).fill(`${title}__${MockHref[index % 10]}`).join(''),
       time: getTodayYMD()
