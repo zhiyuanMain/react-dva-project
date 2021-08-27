@@ -24,7 +24,7 @@ class LogoRow extends React.Component<LogoRowProps, {}> {
   }
   renderSearch = () => {
     const { prefixCls, showSerarch } = this.props
-    if(!showSerarch) return null
+    if (!showSerarch) return null
     const wrapCls = `${prefixCls}__search`
 
     return (

@@ -12,33 +12,26 @@ const NoMatch: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
 }
 
 const CreateRoutes: React.FC<RouteComponentProps> = ({ history }: RouteComponentProps) => {
-  const generateRoute = (
-    { layout, routes }: RouteProps & RouteItem,
-    index: number
-  ) => {
-    const LayoutComponent = 
+  const generateRoute = ({ layout, routes }: RouteProps & RouteItem, index: number) => {
+    const LayoutComponent =
       layout === 'basic' ? BasicLayout : layout === 'require' ? RequireLayout : React.Fragment
-    return (
-      
-        routes.map((item) => {
-          const { path, component: Component, isDynamic } = item
-          return (
-            <Route
-              key={path}
-              path={path}
-              exact={!isDynamic}
-              component={(props: RouteProps) => (
-                <Suspense fallback={<div />}>
-                  <LayoutComponent key={index}>
-                    <Component {...props} />
-                  </LayoutComponent>
-                  
-                </Suspense>
-              )}
-            />
-          )
-        })
-    )
+    return routes.map((item) => {
+      const { path, component: Component, isDynamic } = item
+      return (
+        <Route
+          key={path}
+          path={path}
+          exact={!isDynamic}
+          component={(props: RouteProps) => (
+            <Suspense fallback={<div />}>
+              <LayoutComponent key={index}>
+                <Component {...props} />
+              </LayoutComponent>
+            </Suspense>
+          )}
+        />
+      )
+    })
   }
 
   return (

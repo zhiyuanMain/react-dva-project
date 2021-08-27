@@ -1,5 +1,4 @@
 import React from 'react'
-import { Block } from 'src/components'
 import LogoRow from '../components/LogoRow'
 import './index.less'
 
@@ -21,7 +20,7 @@ class RequireLayout extends React.Component<RequireLayoutProps, {}> {
 
     return (
       <section className={wrapCls}>
-        <LogoRow  showSerarch={false}/>
+        <LogoRow showSerarch={false} />
       </section>
     )
   }
@@ -42,11 +41,9 @@ class RequireLayout extends React.Component<RequireLayoutProps, {}> {
     return (
       <div className={prefixCls}>
         <div className={`${prefixCls}__container`}>
-        {this.renderHeader()}
-        {this.renderTitle()}
-        <div className={`${prefixCls}__main`}>
-          {children}
-        </div>
+          {this.renderHeader()}
+          {this.renderTitle()}
+          <div className={`${prefixCls}__main`}>{children}</div>
         </div>
       </div>
     )

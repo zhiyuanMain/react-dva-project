@@ -47,11 +47,14 @@ const allRoutes: RouteItem[] = [
         title: 'openGovernmentAffairs',
         path: '/openGovernmentAffairs',
         component: React.lazy(
-          () => import(/* webpackChunkName: "page-openGovernmentAffairs" */ '../views/open-government-affairs')
-        ) 
-      },
+          () =>
+            import(
+              /* webpackChunkName: "page-openGovernmentAffairs" */ '../views/open-government-affairs'
+            )
+        )
+      }
     ]
-  },
+  }
 ]
 
 export default allRoutes

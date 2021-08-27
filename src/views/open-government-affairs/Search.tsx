@@ -20,11 +20,9 @@ class Search extends React.Component<SearchProps, {}> {
 
   render() {
     return (
-        <div className={this.props.prefixCls}>
-            <Input.Search
-                style={{width: 510, borderRadius: 9}}
-            onSearch={this.handleSearch} />
-        </div>
+      <div className={this.props.prefixCls}>
+        <Input.Search style={{ width: 510, borderRadius: 9 }} onSearch={this.handleSearch} />
+      </div>
     )
   }
 }

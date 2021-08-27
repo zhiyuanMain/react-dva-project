@@ -5,10 +5,30 @@ import './TabBlock.less'
 import PanelList, { PanelListItem } from 'src/components/panel-list'
 
 const BlockItems = [
-    {img: require('../../assets/img/tabblock-2.png'), title: '政府信息', subtitle: '公开指南', key: 0},
-    {img: require('../../assets/img/tabblock-2.png'), title: '政府信息', subtitle: '公开制度', key: 1},
-    {img: require('../../assets/img/tabblock-3.png'), title: '政府信息', subtitle: '公开内容', key: 2},
-    {img: require('../../assets/img/tabblock-4.png'), title: '政府信息', subtitle: '公开年报', key: 3},
+  {
+    img: require('../../assets/img/tabblock-2.png'),
+    title: '政府信息',
+    subtitle: '公开指南',
+    key: 0
+  },
+  {
+    img: require('../../assets/img/tabblock-2.png'),
+    title: '政府信息',
+    subtitle: '公开制度',
+    key: 1
+  },
+  {
+    img: require('../../assets/img/tabblock-3.png'),
+    title: '政府信息',
+    subtitle: '公开内容',
+    key: 2
+  },
+  {
+    img: require('../../assets/img/tabblock-4.png'),
+    title: '政府信息',
+    subtitle: '公开年报',
+    key: 3
+  }
 ]
 interface TabBlockProps {
   prefixCls?: string
@@ -25,13 +45,12 @@ class TabBlock extends React.Component<TabBlockProps, TabBlockState> {
 
   state: TabBlockState = {
     activeKey: 0,
-    list: [...mockPanelList(`公开指南`, 15)]
+    list: [...mockPanelList('公开指南', 15)]
   }
 
   static defaultProps = {
     prefixCls: 'open-government-affairs-page__tabblock'
   }
-
 
   handleSwitch = (key: number) => {
     this.setState({
@@ -41,33 +60,34 @@ class TabBlock extends React.Component<TabBlockProps, TabBlockState> {
   }
 
   renderTabs = () => {
-    const { prefixCls} = this.props
+    const { prefixCls } = this.props
     const wrapCls = `${prefixCls}__tabs`
     return (
       <div className={wrapCls}>
-        {
-              BlockItems.map((item, index) => {
-                const wrapItemCls = classNames([
-                  `${wrapCls}__item`, 
-                  this.state.activeKey === item.key ? `${wrapCls}__item-active` : ''
-                ])
-                return (
-                  <section className={wrapItemCls} key={index} onClick={() => this.handleSwitch(item.key)}>
-                      <img src={item.img} />
-                      <div>
-                          <h6>{item.title}</h6>
-                          <h6>{item.subtitle}</h6>
-                      </div>
-                  </section>
-              )
-              })
-          }
+        {BlockItems.map((item, index) => {
+          const wrapItemCls = classNames([
+            `${wrapCls}__item`,
+            this.state.activeKey === item.key ? `${wrapCls}__item-active` : ''
+          ])
+          return (
+            <section
+              className={wrapItemCls}
+              key={index}
+              onClick={() => this.handleSwitch(item.key)}>
+              <img src={item.img} />
+              <div>
+                <h6>{item.title}</h6>
+                <h6>{item.subtitle}</h6>
+              </div>
+            </section>
+          )
+        })}
       </div>
     )
   }
 
   renderList = () => {
-    const { prefixCls} = this.props
+    const { prefixCls } = this.props
     const wrapCls = `${prefixCls}__list`
     return (
       <div className={wrapCls}>
@@ -78,12 +98,12 @@ class TabBlock extends React.Component<TabBlockProps, TabBlockState> {
 
   render() {
     const { prefixCls } = this.props
-    
+
     return (
-        <div className={prefixCls}>
-            {this.renderTabs()}
-            {this.renderList()}
-        </div>
+      <div className={prefixCls}>
+        {this.renderTabs()}
+        {this.renderList()}
+      </div>
     )
   }
 }

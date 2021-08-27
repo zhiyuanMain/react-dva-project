@@ -1,7 +1,6 @@
 import React from 'react'
 import SearchRow from './Search'
 import './index.less'
-import { Block } from 'src/components'
 import TabBlock from './TabBlock'
 
 type DashboardProps = {
@@ -20,7 +19,7 @@ const Dashboard: React.FC<DashboardProps & DefaultProps> = (props) => (
       <SearchRow />
     </div>
     <div className={`${props.prefixCls}__content`}>
-        <TabBlock />
+      <TabBlock />
     </div>
   </div>
 )
