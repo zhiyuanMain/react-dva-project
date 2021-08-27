@@ -49,7 +49,9 @@ class NavRow extends React.Component<NavRowProps, {}> {
               <Menu.Item key={item.key}>
                 {item.key === 'dashboard' ? (
                   <Link to={'/dashboard'}>{item.title}</Link>
-                ) : (
+                ) : item.key === CHANNEL_CONSTANTS.openGovernmentAffairs ? (
+                  <Link to={`/${item.key}`}>{item.title}</Link>
+                ): (
                   <Link to={`/channel/${item.key}`}>{item.title}</Link>
                 )}
               </Menu.Item>

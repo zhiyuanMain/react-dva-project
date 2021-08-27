@@ -1,0 +1,51 @@
+.open-government-affairs-page__tabblock {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    &__tabs {
+        &__item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 240px;
+            height: 70px;
+            margin-bottom: 20px;
+            padding: 10px 25px;
+            background-color: #fff;
+            border: 1px solid #E7E7E7;
+            cursor: pointer;
+
+            > img {
+                display: block;
+                width: 40px;
+                height: 40px;
+                margin-right: 12px;
+            }
+
+            > div {
+                h6 {
+                    margin: 0;
+                    color: #2E5D9A;
+                    font-size: 18px;
+                }
+            }
+
+            &-active {
+                background-color: #2D66A4;
+                > div {
+                    h6 {
+                        color: #fff;
+                    }
+                }
+            }
+
+        }
+    }
+
+    &__list {
+        flex: 1;
+        margin-left: 30px;
+        overflow: hidden;
+    }
+    
+}

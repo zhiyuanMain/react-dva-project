@@ -1,0 +1,23 @@
+.open-government-affairs-page__searchrow {
+    position: relative;
+    padding: 80px 0;
+    text-align: center;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        width: 240px;
+        height: 2px;
+        background-color: #E5E5E5;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &::before {
+        left: 36px;
+    }
+    &::after {
+        right: 36px;
+    }
+}

@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { Router, Route, Switch, Redirect, RouteComponentProps, RouteProps } from 'dva/router'
 import allRoutes, { RouteItem } from './config'
-import { BasicLayout } from '../layouts'
+import { BasicLayout, RequireLayout } from '../layouts'
 const NoMatch: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
   return (
     <div>
@@ -12,14 +12,15 @@ const NoMatch: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
 }
 
 const CreateRoutes: React.FC<RouteComponentProps> = ({ history }: RouteComponentProps) => {
-  const generateRoute: React.FC<RouteItem> = (
+  const generateRoute = (
     { layout, routes }: RouteProps & RouteItem,
     index: number
   ) => {
-    const LayoutComponent = layout === 'basic' ? BasicLayout : React.Fragment
+    const LayoutComponent = 
+      layout === 'basic' ? BasicLayout : layout === 'require' ? RequireLayout : React.Fragment
     return (
-      <LayoutComponent key={index}>
-        {routes.map((item) => {
+      
+        routes.map((item) => {
           const { path, component: Component, isDynamic } = item
           return (
             <Route
@@ -28,13 +29,15 @@ const CreateRoutes: React.FC<RouteComponentProps> = ({ history }: RouteComponent
               exact={!isDynamic}
               component={(props: RouteProps) => (
                 <Suspense fallback={<div />}>
-                  <Component {...props} />
+                  <LayoutComponent key={index}>
+                    <Component {...props} />
+                  </LayoutComponent>
+                  
                 </Suspense>
               )}
             />
           )
-        })}
-      </LayoutComponent>
+        })
     )
   }
 

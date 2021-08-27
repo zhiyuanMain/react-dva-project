@@ -7,6 +7,7 @@ import './LogoRow.less'
 const { Search } = Input
 interface LogoRowProps {
   prefixCls?: string
+  showSerarch?: boolean
 }
 class LogoRow extends React.Component<LogoRowProps, {}> {
   constructor(props: LogoRowProps | Readonly<LogoRowProps>) {
@@ -14,14 +15,16 @@ class LogoRow extends React.Component<LogoRowProps, {}> {
   }
 
   static defaultProps = {
-    prefixCls: 'suprlc-logorow'
+    prefixCls: 'suprlc-logorow',
+    showSerarch: true
   }
 
   handleSearch = (e: string) => {
     console.log(e)
   }
   renderSearch = () => {
-    const { prefixCls } = this.props
+    const { prefixCls, showSerarch } = this.props
+    if(!showSerarch) return null
     const wrapCls = `${prefixCls}__search`
 
     return (

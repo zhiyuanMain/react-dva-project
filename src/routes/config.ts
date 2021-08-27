@@ -8,7 +8,7 @@ interface RouteArrItem {
 }
 
 export interface RouteItem {
-  layout: 'basic' | 'blank'
+  layout: 'basic' | 'blank' | 'require'
   routes: RouteArrItem[]
 }
 const allRoutes: RouteItem[] = [
@@ -39,7 +39,19 @@ const allRoutes: RouteItem[] = [
         )
       }
     ]
-  }
+  },
+  {
+    layout: 'require',
+    routes: [
+      {
+        title: 'openGovernmentAffairs',
+        path: '/openGovernmentAffairs',
+        component: React.lazy(
+          () => import(/* webpackChunkName: "page-openGovernmentAffairs" */ '../views/open-government-affairs')
+        ) 
+      },
+    ]
+  },
 ]
 
 export default allRoutes
