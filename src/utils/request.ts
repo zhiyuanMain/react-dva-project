@@ -1,3 +1,4 @@
+import { message } from 'antd'
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 import printLog from './log'
 
@@ -50,7 +51,7 @@ methods.forEach((v: HttpMethod) => {
     }
     const axiosConfig: AxiosRequestConfig = {
       method: v,
-      url,
+      url: `${process.env.API_ASSETS}${url}`,
       headers: {
         ...headers,
         ...(params.headers || {})
@@ -90,6 +91,7 @@ methods.forEach((v: HttpMethod) => {
       if (response.data) {
         const { code, msg, result } = response.data
         if (code !== 0) {
+          message.error(msg)
           printLog.error(msg)
         }
 
@@ -99,6 +101,7 @@ methods.forEach((v: HttpMethod) => {
           return response.data
         }
       } else {
+        message.error('请求错误，请重试')
         printLog.error('incorrect data format')
         return response.data
       }

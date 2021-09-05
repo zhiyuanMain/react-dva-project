@@ -25,7 +25,7 @@ const allRoutes: RouteItem[] = [
       {
         title: 'Channel',
         isDynamic: true,
-        path: '/channel/:type',
+        path: '/list/:type',
         component: React.lazy(
           () => import(/* webpackChunkName: "page-channel" */ '../views/channel')
         )

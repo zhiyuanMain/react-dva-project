@@ -13,6 +13,7 @@ interface PanelListProps {
   list: PanelListItem[]
   shouldRenderTime?: boolean
   textOverhidden: number
+  height?: string | number
 }
 
 class PanelList extends React.Component<PanelListProps, {}> {
@@ -27,7 +28,7 @@ class PanelList extends React.Component<PanelListProps, {}> {
   }
 
   render() {
-    const { prefixCls, list, shouldRenderTime, textOverhidden } = this.props
+    const { prefixCls, list, shouldRenderTime, textOverhidden, height } = this.props
     let liStyles = {}
     if (textOverhidden > 1) {
       liStyles = {
@@ -38,7 +39,7 @@ class PanelList extends React.Component<PanelListProps, {}> {
       }
     }
     return (
-      <ul className={prefixCls}>
+      <ul className={prefixCls} style={{ height }}>
         {list.map((item) => (
           <li key={item.id}>
             <Link style={liStyles} title={item.title} to={item.url}>

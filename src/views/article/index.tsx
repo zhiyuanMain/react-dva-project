@@ -23,7 +23,7 @@ class Article extends React.Component<ArticleProps & RouteComponentProps, {}> {
     return (
       <div className={prefixCls}>
         <Block.Center>
-          <HArticle id={match.params.id} />
+          <HArticle id={match.params.id || ''} />
         </Block.Center>
       </div>
     )

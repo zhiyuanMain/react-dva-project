@@ -51,6 +51,7 @@ module.exports = {
     'no-debugger': 2, //禁用debugger
     'react/prop-types': 0,
     'no-console': 0,
-    '@typescript-eslint/interface-name-prefix': 0
+    '@typescript-eslint/interface-name-prefix': 0,
+    '@typescript-eslint/no-var-requires': 0
   },
 }

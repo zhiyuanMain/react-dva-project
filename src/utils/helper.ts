@@ -15,3 +15,7 @@ export const getToday = () => {
 export const getTodayYMD = () => {
   return moment().format('YYYY/MM/DD')
 }
+
+export const formatTime = (time: number) => {
+  return moment(time).format('YYYY/MM/DD')
+}

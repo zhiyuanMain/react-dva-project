@@ -52,7 +52,7 @@ class NavRow extends React.Component<NavRowProps, {}> {
                 ) : item.key === CHANNEL_CONSTANTS.openGovernmentAffairs ? (
                   <Link to={`/${item.key}`}>{item.title}</Link>
                 ) : (
-                  <Link to={`/channel/${item.key}`}>{item.title}</Link>
+                  <Link to={`/list/${item.key}`}>{item.title}</Link>
                 )}
               </Menu.Item>
             ))}

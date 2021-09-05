@@ -1,15 +1,18 @@
 import { Breadcrumb } from 'antd'
 import { Link } from 'dva/router'
 import React from 'react'
+import gateway from 'src/services/gateway'
+import { formatTime } from 'src/utils/helper'
 import './HArticle.less'
 
 interface HArticleProps {
   prefixCls?: string
-  id?: string
+  id: string
 }
 type BreadcrumbListItem = {
-  category: string
-  categoryName: string
+  title: string
+  path?: string
+  category: 'text' | 'link'
 }
 
 type Info = {
@@ -32,6 +35,11 @@ interface HArticleState {
     prev: Partial<RefInfo>
     next: Partial<RefInfo>
   }
+}
+
+const BreadcrumbListItemMock: BreadcrumbListItem = {
+  title: '正文',
+  category: 'text'
 }
 class HArticle extends React.Component<HArticleProps, HArticleState> {
   constructor(props: HArticleProps | Readonly<HArticleProps>) {
@@ -59,25 +67,26 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
   }
 
   componentDidMount() {
-    this.setState({
-      breadcrumb: [
-        { category: 'dashboard', categoryName: '首页' },
-        { category: 'channel', categoryName: '政务公开' },
-        { category: 'channel', categoryName: '直属单位' },
-        { category: 'text', categoryName: '正文' }
-      ],
-      title: '榆林市农业科技试验示范中心',
-      info: {
-        time: '2018-07-19 10:07:00',
-        count: 1259,
-        src: '新闻联播',
-        author: '李娜娜'
-      },
-      main: '<p style="text-indent:43px"><span style="font-size: 21px; font-family: 仿宋;">榆林市农业科技试验示范中心是隶属于榆林市农业局的财政差额事业单位，前身是榆林市原种场，2011年12月更名为榆林市农业科技试验示范中心。单位现有职工21人，其中专业技术人员13人。总土地面积780亩，耕地600亩，其中水浇地480亩，旱台地120亩；固定资产1219多万元，其中，办公室13间，共650平方米，新建培训室6间，共300平方米；连栋智能温室两座，占地20亩；高标准日光温室24座，占地80亩；塑料大棚46个，占地80亩；蓄水池500ｍ3、300ｍ3各1座；职工文体活动广场一处，占地2100m2；果蔬冷藏库3间，容积150吨，占地750m3;果蔬整理加工车间1间,占地100m2；种养殖一体化蓄肥池1座，库容252m3；多功能会议室、党员活动室和业务培训室各1间，总面积270m2。</span></p> <video autoplay loop src="https://www.w3school.com.cn/i/movie.ogg" />',
-      refs: {
-        prev: { title: '榆林市蚕桑工作站', id: 'prev123' },
-        next: { title: '榆林市蚕桑工作站', id: 'next123' }
-      }
+    gateway.article.req(this.props.id).then((res) => {
+      this.setState({
+        breadcrumb: res.paths.map((item) => ({
+          category: 'link',
+          title: item.title,
+          path: item.path
+        })),
+        title: res.title,
+        info: {
+          time: formatTime(res.publishTime),
+          count: res.totalView,
+          src: res.source,
+          author: res.author
+        },
+        main: res.body,
+        refs: {
+          prev: { title: '榆林市蚕桑工作站', id: 'prev123' },
+          next: { title: '榆林市蚕桑工作站', id: 'next123' }
+        }
+      })
     })
   }
 
@@ -89,16 +98,15 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
 
   renderBreadcrumb = () => {
     const { breadcrumb } = this.state
+    const glist = [...breadcrumb, { ...BreadcrumbListItemMock }]
     const content = (
       <Breadcrumb>
-        {breadcrumb.map((item, index) => (
+        {glist.map((item, index) => (
           <Breadcrumb.Item key={index}>
             {item.category === 'text' ? (
-              `${item.categoryName}`
-            ) : item.category === 'dashboard' ? (
-              <Link to={'/dashboard'}>{item.categoryName}</Link>
+              `${item.title}`
             ) : (
-              <Link to={`/channel/${item.category}`}>{item.categoryName}</Link>
+              <Link to={item.path as string}>{item.title}</Link>
             )}
           </Breadcrumb.Item>
         ))}
