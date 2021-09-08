@@ -1,9 +1,10 @@
-import { Pagination } from 'antd'
+import { Empty, Pagination } from 'antd'
 import React from 'react'
 import { PanelList } from 'src/components'
 import { PanelListItem } from 'src/components/panel-list'
 import { ChannelContentType } from 'src/constant/channel'
-import { mockPanelList } from 'src/views/dashboard/components/_utils'
+import gateway from 'src/services/gateway'
+import { formatTime } from 'src/utils/helper'
 import './index.less'
 
 interface ListProps {
@@ -33,13 +34,20 @@ class List extends React.Component<ListProps, ListState> {
 
   componentDidMount() {
     // 获取数据
-    this.genData()
+    this.genData(1)
   }
 
-  genData = () => {
-    this.setState({
-      total: 98,
-      list: [...mockPanelList(`${this.props.type}-page-${this.state.currentPage}`, 15)]
+  genData = (pageNumber: number) => {
+    gateway.channel.req(this.props.type, pageNumber).then((res) => {
+      this.setState({
+        total: res.totalRow,
+        list: res.list.map((item) => ({
+          url: item.to,
+          id: item.id,
+          title: item.title,
+          time: formatTime(item.publishTime)
+        }))
+      })
     })
   }
 
@@ -49,7 +57,7 @@ class List extends React.Component<ListProps, ListState> {
         currentPage: page
       },
       () => {
-        this.genData()
+        this.genData(page)
       }
     )
   }
@@ -73,6 +81,7 @@ class List extends React.Component<ListProps, ListState> {
       <div className={wrapCls}>
         <Pagination
           showSizeChanger={false}
+          pageSize={25}
           current={currentPage}
           total={total}
           onChange={this.handlePaginationChange}
@@ -85,8 +94,14 @@ class List extends React.Component<ListProps, ListState> {
     const { prefixCls } = this.props
     return (
       <div className={prefixCls}>
-        {this.renderContent()}
-        {this.renderPagination()}
+        {this.state.list ? (
+          <Empty />
+        ) : (
+          <React.Fragment>
+            {this.renderContent()}
+            {this.renderPagination()}
+          </React.Fragment>
+        )}
       </div>
     )
   }

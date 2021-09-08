@@ -21,11 +21,25 @@ const channelList = tuple(
   'zwgk', // 政务公开
   'wmhf', // 网民回复
   'ztzl', // 专题专栏
-  'qtzx' // 其他资讯
+  'dfjs', // 党风建设
+  'ldjs', // 领导介绍
+  'zwgk', // 政务公开
+  'bgxz', // 表格下载
+  'wsdc', // 网上调查
+  'spxw', // 视频新闻
+  'ltqy', // 龙头企业
+  'kjjy', // 科技教育
+  'zcfg', // 政策法规
+  'zhzf', // 综合执法
+  'zlaq', // 质量安全
+  'ycyp', // 一村一品
+  'gscy', // 果桑茶艺
+  'njgl', // 农经管理
+  'zzny' // 种子能源
 )
 
 export type ChannelType = typeof channelList[number]
-export type ChannelContentType = Omit<ChannelType, 'cityBureauProfile' | 'functionIntroduction'>
+export type ChannelContentType = Omit<ChannelType, 'sjgk' | 'znjs' | 'ldjs'>
 const CHANNEL_CONSTANTS = channelList.reduce(
   (prevVal, currentVal) => ({
     ...prevVal,

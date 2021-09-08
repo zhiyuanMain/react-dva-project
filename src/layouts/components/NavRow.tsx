@@ -17,7 +17,7 @@ const NavList: NavListItem[] = [
   { key: CHANNEL_CONSTANTS.zwgk, title: '政务公开' },
   { key: CHANNEL_CONSTANTS.wmhf, title: '网民回复' },
   { key: CHANNEL_CONSTANTS.ztzl, title: '专题专栏' },
-  { key: CHANNEL_CONSTANTS.qtzx, title: '其他资讯' }
+  { key: CHANNEL_CONSTANTS.dfjs, title: '党风建设' }
 ]
 
 interface NavRowProps {
