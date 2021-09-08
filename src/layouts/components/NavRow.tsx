@@ -11,13 +11,13 @@ type NavListItem = {
 }
 const NavList: NavListItem[] = [
   { key: 'dashboard', title: '首页' },
-  { key: CHANNEL_CONSTANTS.cityBureauProfile, title: '市局概况' },
-  { key: CHANNEL_CONSTANTS.functionIntroduction, title: '职能介绍' },
-  { key: CHANNEL_CONSTANTS.onlineServices, title: '网上服务' },
-  { key: CHANNEL_CONSTANTS.openGovernmentAffairs, title: '政务公开' },
-  { key: CHANNEL_CONSTANTS.replyFromNetizens, title: '网民回复' },
-  { key: CHANNEL_CONSTANTS.specialColumn, title: '专题专栏' },
-  { key: CHANNEL_CONSTANTS.otherInformation, title: '其他资讯' }
+  { key: CHANNEL_CONSTANTS.sjgk, title: '市局概况' },
+  { key: CHANNEL_CONSTANTS.znjs, title: '职能介绍' },
+  { key: CHANNEL_CONSTANTS.wsfw, title: '网上服务' },
+  { key: CHANNEL_CONSTANTS.zwgk, title: '政务公开' },
+  { key: CHANNEL_CONSTANTS.wmhf, title: '网民回复' },
+  { key: CHANNEL_CONSTANTS.ztzl, title: '专题专栏' },
+  { key: CHANNEL_CONSTANTS.qtzx, title: '其他资讯' }
 ]
 
 interface NavRowProps {
@@ -49,7 +49,7 @@ class NavRow extends React.Component<NavRowProps, {}> {
               <Menu.Item key={item.key}>
                 {item.key === 'dashboard' ? (
                   <Link to={'/dashboard'}>{item.title}</Link>
-                ) : item.key === CHANNEL_CONSTANTS.openGovernmentAffairs ? (
+                ) : item.key === CHANNEL_CONSTANTS.zwgk ? (
                   <Link to={`/${item.key}`}>{item.title}</Link>
                 ) : (
                   <Link to={`/list/${item.key}`}>{item.title}</Link>

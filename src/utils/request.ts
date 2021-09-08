@@ -91,7 +91,7 @@ methods.forEach((v: HttpMethod) => {
       if (response.data) {
         const { code, msg, result } = response.data
         if (code !== 0) {
-          message.error(msg)
+          // message.error(msg)
           printLog.error(msg)
         }
 
@@ -131,15 +131,16 @@ interface Params {
   url: string
   method: HttpMethod
   data?: any
+  filter?: boolean
   responseType?: string
 }
 const requestProxy = <T>(requestOpts: Params): Promise<T> => {
-  const { url, method, data = {}, responseType } = requestOpts
+  const { url, method, data = {}, responseType, filter = true } = requestOpts
   return new Promise((resolve, reject) => {
     http[method]({
       url,
       data,
-      filter: true,
+      filter,
       responseType
     }).then(
       (res: T) => resolve(res),

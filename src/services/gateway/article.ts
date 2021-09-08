@@ -8,6 +8,8 @@ export type Path = {
 export interface ResArticle extends LinkItem {
   author: string
   body: string
+  columnId: string
+  describe: string
   paths: Path[]
   source: string
   totalView: number

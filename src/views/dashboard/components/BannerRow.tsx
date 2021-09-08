@@ -67,7 +67,7 @@ class BannerRow extends React.Component<BannerRowProps, BannerRowState> {
                 <img src={banner1} />
 
                 <article>
-                  <h1 dangerouslySetInnerHTML={{ __html: item.title }}></h1>
+                  <h1 dangerouslySetInnerHTML={{ __html: item.name }}></h1>
                   <h6 dangerouslySetInnerHTML={{ __html: item.title }}></h6>
                   <dl>
                     <dt>{currentCarouselIdx}</dt>

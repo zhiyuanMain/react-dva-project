@@ -8,6 +8,9 @@ import './HArticle.less'
 interface HArticleProps {
   prefixCls?: string
   id: string
+  shouldRenderBreadcrumb?: boolean
+  shouldRenderInfo?: boolean
+  shouldRenderFooter?: boolean
 }
 type BreadcrumbListItem = {
   title: string
@@ -47,7 +50,10 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
   }
 
   static defaultProps = {
-    prefixCls: 'article-page-harticle'
+    prefixCls: 'article-page-harticle',
+    shouldRenderBreadcrumb: true,
+    shouldRenderInfo: true,
+    shouldRenderFooter: true
   }
 
   state: HArticleState = {
@@ -67,26 +73,48 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
   }
 
   componentDidMount() {
+    this.getData()
+  }
+
+  componentDidUpdate(prevProps: HArticleProps) {
+    if (this.props.id !== prevProps.id) {
+      this.getData()
+    }
+  }
+
+  getData = () => {
+    // 获取文章内容
     gateway.article.req(this.props.id).then((res) => {
-      this.setState({
-        breadcrumb: res.paths.map((item) => ({
-          category: 'link',
-          title: item.title,
-          path: item.path
-        })),
-        title: res.title,
-        info: {
-          time: formatTime(res.publishTime),
-          count: res.totalView,
-          src: res.source,
-          author: res.author
+      this.setState(
+        {
+          breadcrumb: res.paths.map((item) => ({
+            category: 'link',
+            title: item.title,
+            path: item.path
+          })),
+          title: res.title,
+          info: {
+            time: formatTime(res.publishTime),
+            count: res.totalView,
+            src: res.source,
+            author: res.author
+          },
+          main: res.body
         },
-        main: res.body,
-        refs: {
-          prev: { title: '榆林市蚕桑工作站', id: 'prev123' },
-          next: { title: '榆林市蚕桑工作站', id: 'next123' }
+        () => {
+          // 请求上一篇下一篇
+          gateway.articleRef.req(res.columnId, this.props.id).then((rres) => {
+            const prevItem = rres.find((item) => item.sort === '0')
+            const nextItem = rres.find((item) => item.sort === '1')
+            this.setState({
+              refs: {
+                prev: prevItem ? { title: prevItem.title, id: prevItem.id } : {},
+                next: nextItem ? { title: nextItem.title, id: nextItem.id } : {}
+              }
+            })
+          })
         }
-      })
+      )
     })
   }
 
@@ -138,31 +166,36 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
   }
   renderFooter = () => {
     const { refs } = this.state
-    const renderLink = (data: Partial<RefInfo>, spanText: string) =>
+    console.log(refs)
+    const renderLink = (data: Partial<RefInfo>, spanText: string, type: 'prev' | 'next') =>
       data && Object.keys(data || {}).length ? (
         <span>
-          【{spanText}】<Link to={`/article/${refs.prev.id}`}>{refs.prev.title}</Link>
+          【{spanText}】
+          <Link to={`/article/${refs[type].id}`} title={refs[type].title}>
+            {refs[type].title}
+          </Link>
         </span>
       ) : (
         <span />
       )
     const content = (
       <React.Fragment>
-        {renderLink(refs.prev, '上一篇')}
-        {renderLink(refs.next, '下一篇')}
+        {renderLink(refs.prev, '上一篇', 'prev')}
+        {renderLink(refs.next, '下一篇', 'next')}
       </React.Fragment>
     )
     return this.renderRow('footer', content)
   }
 
   render() {
+    const { prefixCls, shouldRenderBreadcrumb, shouldRenderFooter, shouldRenderInfo } = this.props
     return (
-      <div className={this.props.prefixCls}>
-        {this.renderBreadcrumb()}
+      <div className={prefixCls}>
+        {shouldRenderBreadcrumb && this.renderBreadcrumb()}
         {this.renderTitle()}
-        {this.renderInfo()}
+        {shouldRenderInfo && this.renderInfo()}
         {this.renderMain()}
-        {this.renderFooter()}
+        {shouldRenderFooter && this.renderFooter()}
       </div>
     )
   }

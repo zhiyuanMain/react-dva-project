@@ -45,7 +45,7 @@ const allRoutes: RouteItem[] = [
     routes: [
       {
         title: 'openGovernmentAffairs',
-        path: '/openGovernmentAffairs',
+        path: '/zwgk',
         component: React.lazy(
           () =>
             import(

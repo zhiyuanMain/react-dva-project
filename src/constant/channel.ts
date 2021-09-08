@@ -15,13 +15,13 @@ import { tuple } from 'src/utils/type'
 //   {key: 'latestPublication', title: '最新公开'}
 // ]
 const channelList = tuple(
-  'cityBureauProfile', // 市局概况
-  'functionIntroduction', // 职能介绍
-  'onlineServices', // 网上服务
-  'openGovernmentAffairs', // 政务公开
-  'replyFromNetizens', // 网民回复
-  'specialColumn', // 专题专栏
-  'otherInformation' // 其他资讯
+  'sjgk', // 市局概况
+  'znjs', // 职能介绍
+  'wsfw', // 网上服务
+  'zwgk', // 政务公开
+  'wmhf', // 网民回复
+  'ztzl', // 专题专栏
+  'qtzx' // 其他资讯
 )
 
 export type ChannelType = typeof channelList[number]
