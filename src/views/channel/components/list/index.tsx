@@ -94,7 +94,7 @@ class List extends React.Component<ListProps, ListState> {
     const { prefixCls } = this.props
     return (
       <div className={prefixCls}>
-        {this.state.list ? (
+        {!this.state.list.length ? (
           <Empty />
         ) : (
           <React.Fragment>

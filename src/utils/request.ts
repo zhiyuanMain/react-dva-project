@@ -36,7 +36,7 @@ methods.forEach((v: HttpMethod) => {
     params = {
       ...params,
       responseType: params.responseType || 'json',
-      timeout: params.timeout || 1000
+      timeout: params.timeout || 0
     }
     const { url, data, filter, responseType, timeout } = params
     const instance = axios.create({

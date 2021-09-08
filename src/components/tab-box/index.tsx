@@ -1,5 +1,6 @@
 import { Tabs } from 'antd'
 import React from 'react'
+import { ChannelContentType } from 'src/constant/channel'
 import { LinkItem } from 'src/services/gateway'
 import { formatTime } from 'src/utils/helper'
 import PanelList, { PanelListItem } from '../panel-list'
@@ -8,6 +9,7 @@ import './index.less'
 export interface TabItem {
   tabTitle: string
   list: PanelListItem[]
+  type?: ChannelContentType
 }
 interface TabBoxProps {
   prefixCls?: string
@@ -25,7 +27,7 @@ class TabBox extends React.Component<TabBoxProps, {}> {
   static defaultProps = {
     prefixCls: 'suprc-tab-box',
     textOverhidden: 1,
-    height: 330
+    height: 350
   }
 
   render() {
@@ -35,7 +37,12 @@ class TabBox extends React.Component<TabBoxProps, {}> {
         <Tabs defaultActiveKey="0" size="small">
           {tabs.map((item, index) => (
             <Tabs.TabPane tab={item.tabTitle} key={`${index}`}>
-              <PanelList height={height} list={item.list} textOverhidden={textOverhidden} />
+              <PanelList
+                height={height}
+                list={item.list}
+                textOverhidden={textOverhidden}
+                type={item.type}
+              />
             </Tabs.TabPane>
           ))}
         </Tabs>

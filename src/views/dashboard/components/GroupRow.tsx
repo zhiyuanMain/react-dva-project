@@ -4,7 +4,13 @@ import { Block, PanelList } from 'src/components'
 import './GroupRow.less'
 import { mockPanelList } from './_utils'
 
-const imgList = ['leader', 'function', 'bureau', 'company', 'plan']
+const imgList = [
+  { key: 'ldjs', png: 'leader' },
+  { key: 'znjs', png: 'function' },
+  { key: 'sjgk', png: 'bureau' },
+  { key: 'zsdw', png: 'company' },
+  { key: 'ghjh', png: 'plan' }
+]
 interface GroupRowProps {
   prefixCls?: string
 }
@@ -24,8 +30,8 @@ class GroupRow extends React.Component<GroupRowProps, {}> {
       <ul className={wrapCls}>
         {imgList.map((item, index) => (
           <li key={index}>
-            <Link to={`/list/${item}`}>
-              <img src={require(`src/assets/img/intro-${item}.png`)} />
+            <Link to={`/list/${item.key}`}>
+              <img src={require(`src/assets/img/intro-${item.png}.png`)} />
             </Link>
           </li>
         ))}

@@ -15,7 +15,7 @@
     overflow-x: hidden;
     overflow-y: auto;
 
-    li {
+    dd, dt {
         position: relative;
         display: flex;
         justify-content: space-between;
@@ -52,6 +52,18 @@
             display: block;
             margin-left: 90px;
             color: #787E84;
+        }
+    }
+
+    dt {
+        &:before {
+            display: none;
+        }
+
+        justify-content: flex-end;
+
+        a {
+            color: #215290;
         }
     }
 }

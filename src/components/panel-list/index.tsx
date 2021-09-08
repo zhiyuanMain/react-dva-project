@@ -1,5 +1,6 @@
 import { Link } from 'dva/router'
 import React from 'react'
+import { ChannelContentType } from 'src/constant/channel'
 import './index.less'
 
 export interface PanelListItem {
@@ -14,6 +15,7 @@ interface PanelListProps {
   shouldRenderTime?: boolean
   textOverhidden: number
   height?: string | number
+  type?: ChannelContentType
 }
 
 class PanelList extends React.Component<PanelListProps, {}> {
@@ -28,7 +30,7 @@ class PanelList extends React.Component<PanelListProps, {}> {
   }
 
   render() {
-    const { prefixCls, list, shouldRenderTime, textOverhidden, height } = this.props
+    const { prefixCls, list, shouldRenderTime, textOverhidden, height, type } = this.props
     let liStyles = {}
     if (textOverhidden > 1) {
       liStyles = {
@@ -39,16 +41,23 @@ class PanelList extends React.Component<PanelListProps, {}> {
       }
     }
     return (
-      <ul className={prefixCls} style={{ height }}>
+      <dl className={prefixCls} style={{ height }}>
         {list.map((item) => (
-          <li key={item.id}>
+          <dd key={item.id}>
             <Link style={liStyles} title={item.title} to={item.url}>
               {item.title}
             </Link>
             {shouldRenderTime && <span className="time">{item.time}</span>}
-          </li>
+          </dd>
         ))}
-      </ul>
+        {type ? (
+          <dt>
+            <Link style={liStyles} to={`/list/${type}`}>
+              {'更多>>'}
+            </Link>
+          </dt>
+        ) : null}
+      </dl>
     )
   }
 }

@@ -3,7 +3,7 @@ import { Menu } from 'antd'
 import { Block } from 'src/components'
 import './NavRow.less'
 import { Link } from 'dva/router'
-import CHANNEL_CONSTANTS from 'src/constant/channel'
+import CHANNEL_CONSTANTS, { CHANNEL_CONSTANTS_CFG } from 'src/constant/channel'
 
 type NavListItem = {
   key: string
@@ -11,13 +11,13 @@ type NavListItem = {
 }
 const NavList: NavListItem[] = [
   { key: 'dashboard', title: '首页' },
-  { key: CHANNEL_CONSTANTS.sjgk, title: '市局概况' },
-  { key: CHANNEL_CONSTANTS.znjs, title: '职能介绍' },
-  { key: CHANNEL_CONSTANTS.wsfw, title: '网上服务' },
-  { key: CHANNEL_CONSTANTS.zwgk, title: '政务公开' },
-  { key: CHANNEL_CONSTANTS.wmhf, title: '网民回复' },
-  { key: CHANNEL_CONSTANTS.ztzl, title: '专题专栏' },
-  { key: CHANNEL_CONSTANTS.dfjs, title: '党风建设' }
+  { key: CHANNEL_CONSTANTS.sjgk, title: CHANNEL_CONSTANTS_CFG.sjgk.name },
+  { key: CHANNEL_CONSTANTS.znjs, title: CHANNEL_CONSTANTS_CFG.znjs.name },
+  { key: CHANNEL_CONSTANTS.wsfw, title: CHANNEL_CONSTANTS_CFG.wsfw.name },
+  { key: CHANNEL_CONSTANTS.zwgk, title: CHANNEL_CONSTANTS_CFG.zwgk.name },
+  { key: CHANNEL_CONSTANTS.wmhf, title: CHANNEL_CONSTANTS_CFG.wmhf.name },
+  { key: CHANNEL_CONSTANTS.ztzl, title: CHANNEL_CONSTANTS_CFG.ztzl.name },
+  { key: CHANNEL_CONSTANTS.dflz, title: CHANNEL_CONSTANTS_CFG.dflz.name }
 ]
 
 interface NavRowProps {

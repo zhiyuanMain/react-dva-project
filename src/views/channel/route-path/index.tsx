@@ -1,5 +1,5 @@
 import React from 'react'
-import CHANNEL_CONSTANTS, { ChannelContentType, ChannelType } from 'src/constant/channel'
+import { ChannelContentType, channelRefArticleList, ChannelType } from 'src/constant/channel'
 import Content from './Content'
 import './index.less'
 import gateway from 'src/services/gateway'
@@ -47,13 +47,13 @@ class RoutePath extends React.Component<RoutePathProps, RoutePathState> {
   }
 
   isArticle = () => {
-    const articleKeys = [CHANNEL_CONSTANTS.sjgk, CHANNEL_CONSTANTS.znjs]
+    const articleKeys = [...channelRefArticleList]
     if (!this.props.type) return false
-    return articleKeys.includes(this.props.type)
+    return articleKeys.includes(this.props.type as any)
   }
 
   renderContent = () => {
-    // 除了`市局概况、职能介绍`外，其他都是左右结构
+    // 除了`市局概况、职能介绍`等外，其他都是左右结构
     const { type } = this.props
     const { id } = this.state
     return this.isArticle() ? (
