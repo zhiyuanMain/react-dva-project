@@ -84,6 +84,7 @@ class List extends React.Component<ListProps, ListState> {
           pageSize={25}
           current={currentPage}
           total={total}
+          showTotal={(total) => `共${total}条`}
           onChange={this.handlePaginationChange}
         />
       </div>

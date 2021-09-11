@@ -11,7 +11,8 @@ const imgList = [
   {
     png: 'message',
     key: CHANNEL_CONSTANTS.lyb,
-    type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.lyb].type
+    type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.lyb].type,
+    url: '/form/msg-board'
   },
   {
     png: 'guide',
@@ -113,6 +114,12 @@ class OnlineRow extends React.Component<OnlineRowProps, OnlineRowState> {
               <a target="_blank" href={item.url} rel="noreferrer">
                 <img src={require(`src/assets/img/online-${item.png}.png`)} />
               </a>
+            </li>
+          ) : item.url ? (
+            <li key={index}>
+              <Link to={item.url}>
+                <img src={require(`src/assets/img/online-${item.png}.png`)} />
+              </Link>
             </li>
           ) : (
             <li key={index}>

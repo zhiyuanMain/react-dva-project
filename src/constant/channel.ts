@@ -52,7 +52,7 @@ export const CHANNEL_CONSTANTS_CFG = {
   [`${CHANNEL_CONSTANTS.wsdc}`]: { name: '网上调查', type: 'list' },
   [`${CHANNEL_CONSTANTS.zwgk}`]: { name: '政务公开', type: 'privateLink1' },
   [`${CHANNEL_CONSTANTS.wmhf}`]: { name: '网民回复', type: 'privateLink2' },
-  [`${CHANNEL_CONSTANTS.lyb}`]: { name: '网民回复', type: 'privateLink3' },
+  [`${CHANNEL_CONSTANTS.lyb}`]: { name: '我要留言', type: 'privateLink3' },
   [`${CHANNEL_CONSTANTS.ztzl}`]: { name: '专题专栏', type: 'list' },
   [`${CHANNEL_CONSTANTS.bszn}`]: { name: '办事指南', type: 'hyperLink' },
   [`${CHANNEL_CONSTANTS.zxyw}`]: { name: '最新要闻', type: 'list' },
