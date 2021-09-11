@@ -12,7 +12,7 @@ const imgList = [
     png: 'message',
     key: CHANNEL_CONSTANTS.lyb,
     type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.lyb].type,
-    url: '/form/msg-board'
+    url: '/msg-board'
   },
   {
     png: 'guide',

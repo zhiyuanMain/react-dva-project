@@ -1,0 +1,33 @@
+.msgboard-page {
+    padding: 20px 0;
+    &__content {
+        width: 100%;
+    }
+    &__breadcrumb {
+        padding: 10px 10px 0;
+    }
+
+    &__title {
+        position: relative;
+        padding: 20px;
+        font-size: 18px;
+        color: #383D43;
+        text-align: center;
+        font-weight: bold;
+
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 15px;
+            right: 15px;
+            bottom: 0;
+            height: 1px;
+            background-color: #D8D8D8;
+        }
+    }
+
+    &__form {
+        margin-top: 30px;
+    }
+}

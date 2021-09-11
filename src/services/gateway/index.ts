@@ -6,6 +6,7 @@ import * as privateChannel from './privateChannel'
 import * as channel from './channel'
 import * as govInfo from './govInfo'
 import * as msgboardList from './msgboardList'
+import * as sendMsg from './sendMsg'
 
 export interface LinkItem {
   id: string
@@ -24,7 +25,8 @@ const gateway = {
   privateChannel,
   channel,
   govInfo,
-  msgboardList
+  msgboardList,
+  sendMsg
 }
 
 export default gateway
