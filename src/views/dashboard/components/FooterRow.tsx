@@ -35,7 +35,7 @@ class FooterRow extends React.Component<FooterRowProps, {}> {
     const { prefixCls } = this.props
     const wrapCls = `${prefixCls}__right`
     const content = (
-      <img src={require('src/assets/img/qrcode.png')} style={{ width: 120, height: 120 }} />
+      <img src={require('src/assets/img/qrcode.jpeg')} style={{ width: 120, height: 120 }} />
     )
 
     return (
@@ -47,7 +47,7 @@ class FooterRow extends React.Component<FooterRowProps, {}> {
         </section>
         <section className={`${wrapCls}__qrcode`}>
           <Popover content={content}>
-            <img src={require('src/assets/img/qrcode.png')} />
+            <img src={require('src/assets/img/qrcode.jpeg')} />
           </Popover>
         </section>
       </div>

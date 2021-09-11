@@ -1,9 +1,13 @@
-import { Link } from 'dva/router'
 import React from 'react'
 import { Block } from 'src/components'
 import './LinkRow.less'
 
-const imgList = ['ylrb', 'nyb', 'sxnyt', 'ylgov']
+const imgList = [
+  { key: 'ylrb', url: 'http://www.ylrb.com/' },
+  { key: 'nyb', url: 'http://www.moa.gov.cn/' },
+  { key: 'sxnyt', url: 'http://nyt.shaanxi.gov.cn/' },
+  { key: 'ylgov', url: 'http://www.yl.gov.cn/' }
+]
 
 interface LinkRowProps {
   prefixCls?: string
@@ -24,9 +28,9 @@ class LinkRow extends React.Component<LinkRowProps, {}> {
       <ul className={wrapCls}>
         {imgList.map((item, index) => (
           <li key={index}>
-            <Link to="/">
-              <img src={require(`src/assets/img/com-${item}.png`)} />
-            </Link>
+            <a target="_black" href={item.url}>
+              <img src={require(`src/assets/img/com-${item.key}.png`)} />
+            </a>
           </li>
         ))}
       </ul>

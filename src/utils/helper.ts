@@ -1,11 +1,11 @@
 import moment from 'moment'
 
 /**
- * 获取当前星期几
+ * 获取当前具体时间
  * @returns
  */
-export const getToday = () => {
-  return moment().format('YYYY/MM/DD dddd')
+export const getCurrentTime = () => {
+  return moment().format('YYYY/MM/DD dddd HH:mm:ss')
 }
 
 /**
