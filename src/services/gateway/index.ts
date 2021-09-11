@@ -4,6 +4,7 @@ import * as article from './article'
 import * as articleRef from './articleRef'
 import * as privateChannel from './privateChannel'
 import * as channel from './channel'
+import * as govInfo from './govInfo'
 
 export interface LinkItem {
   id: string
@@ -20,7 +21,8 @@ const gateway = {
   article,
   articleRef,
   privateChannel,
-  channel
+  channel,
+  govInfo
 }
 
 export default gateway

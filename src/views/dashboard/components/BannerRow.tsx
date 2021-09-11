@@ -1,7 +1,6 @@
 import React from 'react'
 import { Carousel } from 'antd'
 import { Block, TabBox } from 'src/components'
-import banner1 from 'src/assets/img/banner1.png'
 import './BannerRow.less'
 import { convertLinkData, TabItem } from 'src/components/tab-box'
 import gateway from 'src/services/gateway'
@@ -61,21 +60,20 @@ class BannerRow extends React.Component<BannerRowProps, BannerRowState> {
       <div className={wrapCls}>
         <Carousel autoplay fade dots={false} afterChange={this.handleAfterChange}>
           {bannerList.map((item) => (
-            <Link to={item.to} key={item.id}>
-              <div className={`${wrapCls}__box`}>
+            <div className={`${wrapCls}__box`} key={item.id}>
+              <Link to={item.to}>
                 {/* <img src={item.img} /> */}
-                <img src={banner1} />
+                <img src={item.img} />
 
                 <article>
-                  <h1 dangerouslySetInnerHTML={{ __html: item.name }}></h1>
-                  <h6 dangerouslySetInnerHTML={{ __html: item.title }}></h6>
+                  <h1 dangerouslySetInnerHTML={{ __html: item.title }}></h1>
                   <dl>
                     <dt>{currentCarouselIdx}</dt>
                     <dd>/{bannerList.length}</dd>
                   </dl>
                 </article>
-              </div>
-            </Link>
+              </Link>
+            </div>
           ))}
         </Carousel>
       </div>

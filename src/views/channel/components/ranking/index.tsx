@@ -22,10 +22,10 @@ class Ranking extends React.Component<RankingProps, {}> {
     return (
       <section className={prefixCls}>
         <div className={`${prefixCls}__block`}>
-          <TabBox tabs={totalList} textOverhidden={2} />
+          <TabBox shouldRenderTime={false} tabs={totalList} textOverhidden={2} />
         </div>
         <div className={`${prefixCls}__block`}>
-          <TabBox tabs={monthList} textOverhidden={2} />
+          <TabBox shouldRenderTime={false} tabs={monthList} textOverhidden={2} />
         </div>
       </section>
     )

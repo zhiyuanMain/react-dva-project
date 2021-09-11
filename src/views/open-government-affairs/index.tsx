@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchRow from './Search'
+// import SearchRow from './Search'
 import './index.less'
 import TabBlock from './TabBlock'
 
@@ -15,9 +15,9 @@ const defaultProps = {
 
 const Dashboard: React.FC<DashboardProps & DefaultProps> = (props) => (
   <div className={props.prefixCls}>
-    <div className={`${props.prefixCls}__header`}>
+    {/* <div className={`${props.prefixCls}__header`}>
       <SearchRow />
-    </div>
+    </div> */}
     <div className={`${props.prefixCls}__content`}>
       <TabBlock />
     </div>

@@ -26,7 +26,7 @@ class PanelList extends React.Component<PanelListProps, {}> {
   static defaultProps = {
     prefixCls: 'suprc-panel-list',
     textOverhidden: 1,
-    shouldRenderTime: false
+    shouldRenderTime: true
   }
 
   render() {

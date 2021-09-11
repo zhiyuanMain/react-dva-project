@@ -4,6 +4,7 @@ import { Block } from 'src/components'
 import TabBox, { TabItem } from 'src/components/tab-box'
 import CHANNEL_CONSTANTS, { CHANNEL_CONSTANTS_CFG } from 'src/constant/channel'
 import gateway from 'src/services/gateway'
+import { formatTime } from 'src/utils/helper'
 import './OnlineRow.less'
 
 const imgList = [
@@ -15,7 +16,8 @@ const imgList = [
   {
     png: 'guide',
     key: CHANNEL_CONSTANTS.bszn,
-    type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.bszn].type
+    type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.bszn].type,
+    url: 'http://zwfw.yl.gov.cn/yl-web-zwdt/epointzwmhwz/pages/eventdetail/wanttodo_new?bltype=ou&isnormal=1&vname=610800&areacode=610800&ztvalue=b8495463-2b30-4530-94ef-040bb363571d'
   },
   {
     png: 'excel',
@@ -82,16 +84,18 @@ class OnlineRow extends React.Component<OnlineRowProps, OnlineRowState> {
           list: item.list.splice(0, 10).map((iitem) => ({
             url: iitem.to,
             id: iitem.id,
-            title: iitem.name
+            title: iitem.name,
+            time: formatTime(iitem.publishTime)
           }))
         })),
         rightPanelList: rightRes.map((item, index) => ({
-          tabTitle: CFG[index].name,
-          type: CFG[index].key,
+          tabTitle: CFG[index + 5].name,
+          type: CFG[index + 5].key,
           list: item.list.splice(0, 10).map((iitem) => ({
             url: iitem.to,
             id: iitem.id,
-            title: iitem.name
+            title: iitem.name,
+            time: formatTime(iitem.publishTime)
           }))
         }))
       })
@@ -103,13 +107,21 @@ class OnlineRow extends React.Component<OnlineRowProps, OnlineRowState> {
     const wrapCls = `${prefixCls}__img`
     return (
       <ul className={wrapCls}>
-        {imgList.map((item, index) => (
-          <li key={index}>
-            <Link to={`/list/${item.key}`}>
-              <img src={require(`src/assets/img/online-${item.png}.png`)} />
-            </Link>
-          </li>
-        ))}
+        {imgList.map((item, index) => {
+          return item.type === 'hyperLink' ? (
+            <li key={index}>
+              <a target="_blank" href={item.url} rel="noreferrer">
+                <img src={require(`src/assets/img/online-${item.png}.png`)} />
+              </a>
+            </li>
+          ) : (
+            <li key={index}>
+              <Link to={`/list/${item.key}`}>
+                <img src={require(`src/assets/img/online-${item.png}.png`)} />
+              </Link>
+            </li>
+          )
+        })}
       </ul>
     )
   }
@@ -134,7 +146,7 @@ class OnlineRow extends React.Component<OnlineRowProps, OnlineRowState> {
     return (
       <div className={prefixCls}>
         <Block.Center>
-          <Block.Title icon="group" name="网上服务" />
+          <Block.Title icon="group" name="网上调查" />
         </Block.Center>
         <Block.Center>{this.renderIntro()}</Block.Center>
         <Block.Center>{this.renderInfo()}</Block.Center>

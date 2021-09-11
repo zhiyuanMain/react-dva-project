@@ -4,7 +4,7 @@ const channelList = tuple(
   'sjgk', // 市局概况 article
   'znjs', // 职能介绍 article
   'ldjs', // 领导介绍 article
-  'wsfw', // 网上服务
+  'wsdc', // 网上调查
   'zwgk', // 政务公开 特殊1
   'wmhf', // 网民回复 特殊2
   'lyb', // 留言板   特殊3
@@ -49,7 +49,7 @@ export const CHANNEL_CONSTANTS_CFG = {
   [`${CHANNEL_CONSTANTS.sjgk}`]: { name: '市局概况', type: 'article' },
   [`${CHANNEL_CONSTANTS.znjs}`]: { name: '职能介绍', type: 'article' },
   [`${CHANNEL_CONSTANTS.ldjs}`]: { name: '领导介绍', type: 'article' },
-  [`${CHANNEL_CONSTANTS.wsfw}`]: { name: '网上服务', type: 'list' },
+  [`${CHANNEL_CONSTANTS.wsdc}`]: { name: '网上调查', type: 'list' },
   [`${CHANNEL_CONSTANTS.zwgk}`]: { name: '政务公开', type: 'privateLink1' },
   [`${CHANNEL_CONSTANTS.wmhf}`]: { name: '网民回复', type: 'privateLink2' },
   [`${CHANNEL_CONSTANTS.lyb}`]: { name: '网民回复', type: 'privateLink3' },

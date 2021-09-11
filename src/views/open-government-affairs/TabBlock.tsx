@@ -1,42 +1,28 @@
 import React from 'react'
 import classNames from 'classnames'
-import { mockPanelList } from 'src/views/dashboard/components/_utils'
 import './TabBlock.less'
 import PanelList, { PanelListItem } from 'src/components/panel-list'
+import { ResGovInfo } from 'src/services/gateway/govInfo'
+import gateway, { LinkItem } from 'src/services/gateway'
+import { formatTime } from 'src/utils/helper'
 
-const BlockItems = [
-  {
-    img: require('../../assets/img/tabblock-2.png'),
-    title: '政府信息',
-    subtitle: '公开指南',
-    key: 0
-  },
-  {
-    img: require('../../assets/img/tabblock-2.png'),
-    title: '政府信息',
-    subtitle: '公开制度',
-    key: 1
-  },
-  {
-    img: require('../../assets/img/tabblock-3.png'),
-    title: '政府信息',
-    subtitle: '公开内容',
-    key: 2
-  },
-  {
-    img: require('../../assets/img/tabblock-4.png'),
-    title: '政府信息',
-    subtitle: '公开年报',
-    key: 3
-  }
-]
+const genImg = (index: number, isSelected = false) => {
+  const imgName = !isSelected ? `icon_tab_${index}` : `icon_tab_${index}_select`
+  return require(`../../assets/img/${imgName}.png`)
+}
 interface TabBlockProps {
   prefixCls?: string
 }
 
+type BlockItem = {
+  index: number
+  name: string
+}
 interface TabBlockState {
   activeKey: number
+  blockItem: BlockItem[]
   list: PanelListItem[]
+  allResData: ResGovInfo
 }
 class TabBlock extends React.Component<TabBlockProps, TabBlockState> {
   constructor(props: TabBlockProps | Readonly<TabBlockProps>) {
@@ -45,17 +31,51 @@ class TabBlock extends React.Component<TabBlockProps, TabBlockState> {
 
   state: TabBlockState = {
     activeKey: 0,
-    list: [...mockPanelList('公开指南', 15)]
+    blockItem: [],
+    list: [],
+    allResData: {
+      level: 2,
+      list: []
+    }
   }
 
   static defaultProps = {
     prefixCls: 'open-government-affairs-page__tabblock'
   }
 
+  componentDidMount() {
+    gateway.govInfo.req().then((res) => {
+      this.setState(
+        {
+          allResData: res
+        },
+        () => {
+          this.setState({
+            blockItem: res.list.map((item, index) => ({
+              index: index,
+              name: item.name
+            })),
+            list: this.genList([...res.list[0].list])
+          })
+        }
+      )
+    })
+  }
+
+  genList = (data: LinkItem[]) => {
+    return data.map((item) => ({
+      url: item.to,
+      id: item.id,
+      title: item.title,
+      time: formatTime(item.publishTime)
+    }))
+  }
+
   handleSwitch = (key: number) => {
+    const { allResData } = this.state
     this.setState({
       activeKey: key,
-      list: [...mockPanelList(BlockItems[key].subtitle, 15)]
+      list: this.genList([...allResData.list[key].list])
     })
   }
 
@@ -64,20 +84,19 @@ class TabBlock extends React.Component<TabBlockProps, TabBlockState> {
     const wrapCls = `${prefixCls}__tabs`
     return (
       <div className={wrapCls}>
-        {BlockItems.map((item, index) => {
+        {this.state.blockItem.map((item, index) => {
           const wrapItemCls = classNames([
             `${wrapCls}__item`,
-            this.state.activeKey === item.key ? `${wrapCls}__item-active` : ''
+            this.state.activeKey === item.index ? `${wrapCls}__item-active` : ''
           ])
           return (
             <section
               className={wrapItemCls}
               key={index}
-              onClick={() => this.handleSwitch(item.key)}>
-              <img src={item.img} />
+              onClick={() => this.handleSwitch(item.index)}>
+              <img src={genImg(item.index + 1, this.state.activeKey === item.index)} />
               <div>
-                <h6>{item.title}</h6>
-                <h6>{item.subtitle}</h6>
+                <h6>{item.name}</h6>
               </div>
             </section>
           )

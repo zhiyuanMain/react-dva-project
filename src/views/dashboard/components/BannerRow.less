@@ -5,7 +5,7 @@
     margin-top: 30px;
 
     &__left {
-        width: 755px;
+        width: 655px;
         background-color: #fff;
 
         &__box {
@@ -14,53 +14,49 @@
             align-items: flex-start;
             width: 100% !important;
             height: 360px;
-            img, article {
+            a, img, article {
                 display: block;
+                width: 100%;
                 height: 100%;
                 overflow: hidden;
             }
 
-            img {
-                margin-right: 10px;
-            }
-
             article {
                 display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                flex: 1;
-                height: 100%;
+                justify-content: space-between;
+                align-items: center;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: auto;
+                padding: 10px 20px;
+                background: rgba(0,0,0, .4);
 
                 h1 {
+                    flex: 1;
                     font-size: 18px;
-                    color: #383D43;
-                    padding: 20px 0;
+                    color: #fff;
+                    margin: 0;
                 }
 
-                h6 {
-                    flex: 1;
-                    margin: 0;
-                    font-size: 14px;
-                    color: #787E84;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                }
 
                 dl {
-                    width: 100%;
+                    width: 30px;
+                    margin: 0;
                     text-align: right;
 
                     dt {
                         display: inline;
                         font-size: 20px;
-                        color: #262626;
+                        color: #fff;
                         line-height: 28px;
                     }
 
                     dd {
                         display: inline;
                         font-size: 14px;
-                        color: #787E84;
+                        color: #fff;
                         line-height: 28px;
                     }
                 }
@@ -69,7 +65,7 @@
     }
 
     &__right {
-        width: 436px;
+        width: 536px;
         height: 360px;
         padding: 14px 10px;
         background-color: #fff;

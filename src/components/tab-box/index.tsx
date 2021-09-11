@@ -17,6 +17,7 @@ interface TabBoxProps {
   textOverhidden?: number
   height?: number | 'string'
   tabs: TabItem[]
+  shouldRenderTime?: boolean
 }
 
 class TabBox extends React.Component<TabBoxProps, {}> {
@@ -27,11 +28,12 @@ class TabBox extends React.Component<TabBoxProps, {}> {
   static defaultProps = {
     prefixCls: 'suprc-tab-box',
     textOverhidden: 1,
-    height: 350
+    height: 360,
+    shouldRenderTime: true
   }
 
   render() {
-    const { prefixCls, tabs, style = {}, textOverhidden, height } = this.props
+    const { prefixCls, tabs, style = {}, textOverhidden, height, shouldRenderTime } = this.props
     return (
       <div className={prefixCls} style={style}>
         <Tabs defaultActiveKey="0" size="small">
@@ -41,6 +43,7 @@ class TabBox extends React.Component<TabBoxProps, {}> {
                 height={height}
                 list={item.list}
                 textOverhidden={textOverhidden}
+                shouldRenderTime={shouldRenderTime}
                 type={item.type}
               />
             </Tabs.TabPane>
