@@ -26,36 +26,35 @@ class Msgboard extends React.Component<MsgboardProps, MsgboardState> {
   }
 
   onFinish = (values: any) => {
-    gateway.sendMsg
-      .req({
-        columnId: 'lyb',
-        typeid: 0,
-        title: values.content,
-        a1: values.name,
-        a2: values.sex === 'male' ? '男' : '女',
-        a3: values.qq,
-        a4: values.mail,
-        a5: values.phone,
-        body: values.content,
-        yzm: values.code
-      })
-      .then((res) => {
-        if (res.success) {
-          message.success('您的信件我们已收到，我们会尽快处理！')
-          this.setState(
-            {
-              shouldRenderForm: false
-            },
-            () => {
-              this.setState({
-                shouldRenderForm: true
-              })
-            }
-          )
-        } else {
-          message.error(res.message)
-        }
-      })
+    const requestJson = {
+      columnId: 'lyb',
+      typeid: 0,
+      title: values.content,
+      a1: values.name,
+      a2: values.sex === 'male' ? '男' : '女',
+      a3: values.qq,
+      a4: values.mail,
+      a5: values.phone,
+      body: values.content,
+      yzm: values.code
+    }
+    gateway.sendMsg.req({ ...requestJson }).then((res) => {
+      if (res.success) {
+        message.success('您的信件我们已收到，我们会尽快处理！')
+        this.setState(
+          {
+            shouldRenderForm: false
+          },
+          () => {
+            this.setState({
+              shouldRenderForm: true
+            })
+          }
+        )
+      } else {
+        message.error(res.message)
+      }
+    })
   }
 
   renderBreadcrumb = () => {

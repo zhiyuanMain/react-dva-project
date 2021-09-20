@@ -5,6 +5,7 @@ import NavRow from '../components/NavRow'
 
 interface BasicLayoutProps {
   prefixCls?: string
+  history: any
 }
 class BasicLayout extends React.Component<BasicLayoutProps, {}> {
   constructor(props: BasicLayoutProps | Readonly<BasicLayoutProps>) {
@@ -16,13 +17,13 @@ class BasicLayout extends React.Component<BasicLayoutProps, {}> {
   }
 
   renderHeader = () => {
-    const { prefixCls } = this.props
+    const { prefixCls, history } = this.props
     const wrapCls = `${prefixCls}__header`
 
     return (
       <section className={wrapCls}>
         <HeaderRow />
-        <LogoRow />
+        <LogoRow history={history} />
         <NavRow />
       </section>
     )

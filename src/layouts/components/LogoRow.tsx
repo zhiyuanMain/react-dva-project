@@ -8,6 +8,7 @@ import { Link } from 'dva/router'
 const { Search } = Input
 interface LogoRowProps {
   prefixCls?: string
+  history: any
   showSerarch?: boolean
 }
 class LogoRow extends React.Component<LogoRowProps, {}> {
@@ -21,7 +22,7 @@ class LogoRow extends React.Component<LogoRowProps, {}> {
   }
 
   handleSearch = (e: string) => {
-    console.log(e)
+    this.props.history.push(`/search?keyword=${e}`)
   }
   renderSearch = () => {
     const { prefixCls, showSerarch } = this.props
@@ -30,12 +31,7 @@ class LogoRow extends React.Component<LogoRowProps, {}> {
 
     return (
       <div className={wrapCls}>
-        <Search
-          placeholder="请输入内容"
-          allowClear
-          enterButton="搜索"
-          onSearch={this.handleSearch}
-        />
+        <Search placeholder="请输入内容" enterButton="搜索" onSearch={this.handleSearch} />
       </div>
     )
   }

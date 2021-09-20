@@ -4,6 +4,7 @@ import { Block } from 'src/components'
 import './NavRow.less'
 import { Link } from 'dva/router'
 import CHANNEL_CONSTANTS, { CHANNEL_CONSTANTS_CFG } from 'src/constant/channel'
+import { connect } from 'dva'
 
 type NavListItem = {
   key: string
@@ -63,4 +64,4 @@ class NavRow extends React.Component<NavRowProps, {}> {
   }
 }
 
-export default NavRow
+export default connect()(NavRow)

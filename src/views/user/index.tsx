@@ -67,7 +67,8 @@ class User extends React.Component<UserProps, {}> {
   }
 
   private handlePushGoods = (): void => {
-    this.props.history.push('/dashboard')
+    console.log(this.props)
+    // this.props.history.push('/dashboard')
   }
 
   private handleGetToken = (): void => {

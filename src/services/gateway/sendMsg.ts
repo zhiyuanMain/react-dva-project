@@ -12,12 +12,14 @@ interface ReqParams {
   yzm: string // 验证码
 }
 
-export const req = (data: ReqParams) =>
-  requestProxy<any>({
+export const req = (data: ReqParams) => {
+  return requestProxy<any>({
     method: 'post',
     filter: false,
     url: '/message/send',
-    data: {
-      ...data
-    }
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    },
+    data: { ...data }
   })
+}

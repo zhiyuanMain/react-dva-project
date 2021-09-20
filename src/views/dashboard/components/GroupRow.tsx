@@ -76,6 +76,7 @@ class GroupRow extends React.Component<GroupRowProps, GroupRowState> {
             prevEl: '.swiper-button-prev',
             nextEl: '.swiper-button-next'
           }}
+          allowTouchMove={false}
           onSlideChange={() => console.log('slide change')}
           onSwiper={(swiper) => (this._swiper = swiper)}>
           {bannerData.list.map((item, index) => {

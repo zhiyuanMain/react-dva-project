@@ -40,10 +40,16 @@ const allRoutes: RouteItem[] = [
       },
       {
         title: 'MsgBoard',
-        isDynamic: true,
         path: '/msg-board',
         component: React.lazy(
           () => import(/* webpackChunkName: "page-form-msg-board" */ '../views/msg-board')
+        )
+      },
+      {
+        title: 'Search',
+        path: '/search',
+        component: React.lazy(
+          () => import(/* webpackChunkName: "page-form-msg-board" */ '../views/search')
         )
       }
     ]

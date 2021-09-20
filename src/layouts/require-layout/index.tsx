@@ -4,6 +4,7 @@ import './index.less'
 
 interface RequireLayoutProps {
   prefixCls?: string
+  history: any
 }
 class RequireLayout extends React.Component<RequireLayoutProps, {}> {
   constructor(props: RequireLayoutProps | Readonly<RequireLayoutProps>) {
@@ -15,12 +16,12 @@ class RequireLayout extends React.Component<RequireLayoutProps, {}> {
   }
 
   renderHeader = () => {
-    const { prefixCls } = this.props
+    const { prefixCls, history } = this.props
     const wrapCls = `${prefixCls}__header`
 
     return (
       <section className={wrapCls}>
-        <LogoRow showSerarch={false} />
+        <LogoRow showSerarch={false} history={history} />
       </section>
     )
   }

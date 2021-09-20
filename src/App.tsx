@@ -1,9 +1,9 @@
 import dva from 'dva'
-import { createHashHistory } from 'history'
+import { createBrowserHistory } from 'history'
 
 // 1. Initialize
 const app = dva({
-  history: createHashHistory()
+  history: createBrowserHistory()
 })
 
 // 2. Plugins

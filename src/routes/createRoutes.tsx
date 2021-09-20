@@ -24,7 +24,7 @@ const CreateRoutes: React.FC<RouteComponentProps> = ({ history }: RouteComponent
           exact={!isDynamic}
           component={(props: RouteProps) => (
             <Suspense fallback={<div />}>
-              <LayoutComponent key={index}>
+              <LayoutComponent key={index} {...(props as any)}>
                 <Component {...props} />
               </LayoutComponent>
             </Suspense>

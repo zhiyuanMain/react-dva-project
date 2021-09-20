@@ -56,13 +56,21 @@ methods.forEach((v: HttpMethod) => {
         ...headers,
         ...(params.headers || {})
       },
-      responseType
+      responseType,
+      transformRequest: (data) => {
+        let ret = ''
+        for (const it in data) {
+          ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+        }
+        ret = ret.substring(0, ret.lastIndexOf('&'))
+        return ret
+      }
     }
     if (data) {
       if (v === 'get') {
         axiosConfig.params = data
       } else if (data instanceof FormData) {
-        axiosConfig.data = data
+        axiosConfig.params = data
       } else {
         axiosConfig.data = data
       }
@@ -132,16 +140,18 @@ interface Params {
   method: HttpMethod
   data?: any
   filter?: boolean
+  headers?: any
   responseType?: string
 }
 const requestProxy = <T>(requestOpts: Params): Promise<T> => {
-  const { url, method, data = {}, responseType, filter = true } = requestOpts
+  const { url, method, data = {}, responseType, filter = true, headers } = requestOpts
   return new Promise((resolve, reject) => {
     http[method]({
       url,
       data,
       filter,
-      responseType
+      responseType,
+      headers
     }).then(
       (res: T) => resolve(res),
       (err: Error) => {
