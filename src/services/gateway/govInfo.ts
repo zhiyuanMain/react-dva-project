@@ -4,6 +4,7 @@ type GovInfoItem = {
   list: LinkItem[]
   name: string
   path: string
+  to?: string
 }
 export interface ResGovInfo {
   level: number

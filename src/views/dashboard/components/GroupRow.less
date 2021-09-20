@@ -6,13 +6,32 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
         width: 100%;
 
         img {
             display: block;
             width: 230px;
             height: 80px;
+            margin: 0 auto;
             background-color: #fff;
+            user-select: none;
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            background: rgba(20, 15, 15, 0.5);
+
+            &:after {
+                color: #eee;
+                font-size: 12px;
+            }
+        }
+        .swiper-button-prev {
+            left: -35px;
+        }
+        .swiper-button-next {
+            right: -35px;
         }
     }
 

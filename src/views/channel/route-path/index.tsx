@@ -64,7 +64,7 @@ class RoutePath extends React.Component<RoutePathProps, RoutePathState> {
     return this.props.type === CHANNEL_CONSTANTS.wmhf
   }
   renderContent = () => {
-    if (!this.isEffective()) return null
+    // if (!this.isEffective()) return null
     // 除了`市局概况、职能介绍`等外，其他都是左右结构
     const { type } = this.props
     const { id } = this.state
