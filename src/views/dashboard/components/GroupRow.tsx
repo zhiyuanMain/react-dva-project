@@ -41,6 +41,7 @@ class GroupRow extends React.Component<GroupRowProps, GroupRowState> {
       const listLen =
         result[1].list.length % 2 === 0 ? result[1].list.length : result[1].list.length - 1
       this.setState({
+        // TODO: 是否删除？
         bannerData: {
           ...result[0]
         },
