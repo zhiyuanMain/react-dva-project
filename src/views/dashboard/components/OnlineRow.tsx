@@ -12,28 +12,38 @@ const imgList = [
     png: 'message',
     key: CHANNEL_CONSTANTS.lyb,
     type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.lyb].type,
-    url: '/msg-board'
+    url: '/msg-board',
+    title: '我要留言',
+    subTitle: '留下您想说的话'
   },
   {
     png: 'guide',
     key: CHANNEL_CONSTANTS.bszn,
     type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.bszn].type,
-    url: 'http://zwfw.yl.gov.cn/yl-web-zwdt/epointzwmhwz/pages/eventdetail/wanttodo_new?bltype=ou&isnormal=1&vname=610800&areacode=610800&ztvalue=b8495463-2b30-4530-94ef-040bb363571d'
+    url: 'http://zwfw.yl.gov.cn/yl-web-zwdt/epointzwmhwz/pages/eventdetail/wanttodo_new?bltype=ou&isnormal=1&vname=610800&areacode=610800&ztvalue=b8495463-2b30-4530-94ef-040bb363571d',
+    title: '办事指南',
+    subTitle: '为您排忧解难'
   },
   {
     png: 'excel',
     key: CHANNEL_CONSTANTS.bgxz,
-    type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.bgxz].type
+    type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.bgxz].type,
+    title: '表格下载',
+    subTitle: '下载相关表格'
   },
   {
     png: 'investigation',
     key: CHANNEL_CONSTANTS.wsdc,
-    type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.wsdc].type
+    type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.wsdc].type,
+    title: '网上调查',
+    subTitle: '帮助我们做得更好'
   },
   {
     png: 'video',
     key: CHANNEL_CONSTANTS.spxw,
-    type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.spxw].type
+    type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.spxw].type,
+    title: '视频新闻',
+    subTitle: '新鲜事新鲜报'
   }
 ]
 const CFG_KEYS = [
@@ -52,6 +62,20 @@ const CFG = CFG_KEYS.map((item) => ({
   key: item,
   name: CHANNEL_CONSTANTS_CFG[item].name
 }))
+
+const Section = (props: {
+  png: string
+  title: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined
+  subTitle: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined
+}) => (
+  <React.Fragment>
+    <img src={require(`src/assets/img/online-${props.png}.png`)} />
+    <section>
+      <h1>{props.title}</h1>
+      <h2>{props.subTitle}</h2>
+    </section>
+  </React.Fragment>
+)
 interface OnlineRowProps {
   prefixCls?: string
 }
@@ -112,19 +136,19 @@ class OnlineRow extends React.Component<OnlineRowProps, OnlineRowState> {
           return item.type === 'hyperLink' ? (
             <li key={index}>
               <a target="_blank" href={item.url} rel="noreferrer">
-                <img src={require(`src/assets/img/online-${item.png}.png`)} />
+                <Section title={item.title} subTitle={item.subTitle} png={item.png} />
               </a>
             </li>
           ) : item.url ? (
             <li key={index}>
               <Link to={item.url}>
-                <img src={require(`src/assets/img/online-${item.png}.png`)} />
+                <Section title={item.title} subTitle={item.subTitle} png={item.png} />
               </Link>
             </li>
           ) : (
             <li key={index}>
               <Link to={`/list/${item.key}`}>
-                <img src={require(`src/assets/img/online-${item.png}.png`)} />
+                <Section title={item.title} subTitle={item.subTitle} png={item.png} />
               </Link>
             </li>
           )

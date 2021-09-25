@@ -5,13 +5,10 @@ import gateway, { LinkItem } from 'src/services/gateway'
 import { ResGovInfo } from 'src/services/gateway/govInfo'
 import './GroupRow.less'
 
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react'
-
-// Import Swiper styles
-import 'swiper/swiper-bundle.min.css'
 import { PanelListItem } from 'src/components/panel-list'
 import { formatTime } from 'src/utils/helper'
+
+const ImgList = ['ldjs', 'znjs', 'sjgk', 'zsdw', 'ghjh', 'zrkh', 'cwyjs', 'bgxz', 'gkxgf', 'rsxx']
 interface GroupRowProps {
   prefixCls?: string
 }
@@ -22,7 +19,6 @@ interface GroupRowState {
   rightList: PanelListItem[]
 }
 class GroupRow extends React.Component<GroupRowProps, GroupRowState> {
-  private _swiper: any
   constructor(props: GroupRowProps | Readonly<GroupRowProps>) {
     super(props)
   }
@@ -65,42 +61,14 @@ class GroupRow extends React.Component<GroupRowProps, GroupRowState> {
 
   renderIntro = () => {
     const { prefixCls } = this.props
-    const { bannerData } = this.state
     const wrapCls = `${prefixCls}__img`
     return (
       <div className={wrapCls}>
-        <Swiper
-          width={1200}
-          slidesPerView={5}
-          navigation={{
-            prevEl: '.swiper-button-prev',
-            nextEl: '.swiper-button-next'
-          }}
-          allowTouchMove={false}
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => (this._swiper = swiper)}>
-          {bannerData.list.map((item, index) => {
-            return (
-              <SwiperSlide key={index}>
-                <Link to={item.to || '/'}>
-                  <img
-                    src={require(`src/assets/img/intro-${item.to?.replace('/list/', '')}.png`)}
-                  />
-                </Link>
-              </SwiperSlide>
-            )
-          })}
-        </Swiper>
-        <span
-          className="swiper-button-prev"
-          onClick={() => {
-            this._swiper.slidePrev()
-          }}></span>
-        <span
-          className="swiper-button-next"
-          onClick={() => {
-            this._swiper.slideNext()
-          }}></span>
+        {ImgList.map((item) => (
+          <Link to={`/list/${item}`} key={item}>
+            <img src={require(`../../../assets/img/intro-${item}.png`)} />
+          </Link>
+        ))}
       </div>
     )
   }

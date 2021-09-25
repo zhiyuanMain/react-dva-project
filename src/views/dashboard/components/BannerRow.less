@@ -1,7 +1,4 @@
 .dashboard-page-bannerrow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-top: 30px;
 
     &__left {
@@ -63,5 +60,36 @@
         height: 360px;
         padding: 14px 10px;
         background-color: #fff;
+        .suprc-tab-box .ant-tabs-nav-list .ant-tabs-tab {
+            min-width: 114px;
+        }
+    }
+
+    &__banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 10px;
+
+        a {
+            display: block;
+
+            img {
+                display: block;
+                height: 87px;
+            }
+        }
+
+        a:first-child {
+            img {
+                width: 655px;
+            }
+        }
+        a:last-child {
+            img {
+                width: 536px;
+            }
+        }
     }
 }

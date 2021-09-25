@@ -12,8 +12,8 @@ type NavListItem = {
 }
 const NavList: NavListItem[] = [
   { key: 'dashboard', title: '首页' },
-  { key: CHANNEL_CONSTANTS.sjgk, title: CHANNEL_CONSTANTS_CFG.sjgk.name },
-  { key: CHANNEL_CONSTANTS.znjs, title: CHANNEL_CONSTANTS_CFG.znjs.name },
+  // { key: CHANNEL_CONSTANTS.sjgk, title: CHANNEL_CONSTANTS_CFG.sjgk.name },
+  // { key: CHANNEL_CONSTANTS.znjs, title: CHANNEL_CONSTANTS_CFG.znjs.name },
   { key: CHANNEL_CONSTANTS.wsdc, title: CHANNEL_CONSTANTS_CFG.wsdc.name },
   { key: CHANNEL_CONSTANTS.zwgk, title: CHANNEL_CONSTANTS_CFG.zwgk.name },
   { key: CHANNEL_CONSTANTS.wmhf, title: CHANNEL_CONSTANTS_CFG.wmhf.name },
@@ -47,7 +47,7 @@ class NavRow extends React.Component<NavRowProps, {}> {
             defaultSelectedKeys={[NavList[0].key]}
             mode="horizontal">
             {NavList.map((item) => (
-              <Menu.Item key={item.key}>
+              <Menu.Item key={item.key} style={{ width: 1200 / NavList.length }}>
                 {item.key === 'dashboard' ? (
                   <Link to={'/dashboard'}>{item.title}</Link>
                 ) : item.key === CHANNEL_CONSTANTS.zwgk ? (

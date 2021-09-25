@@ -90,6 +90,21 @@ class BannerRow extends React.Component<BannerRowProps, BannerRowState> {
     )
   }
 
+  renderBanner = () => {
+    const { prefixCls } = this.props
+    const wrapCls = `${prefixCls}__banner`
+    const imgList = ['gbzfjzzdzl', 'ylszcxdnyfzzczl']
+    return (
+      <div className={wrapCls}>
+        {imgList.map((item) => (
+          <Link key={item} to={`/list/${item}`}>
+            <img src={require(`../../../assets/img/banner-${item}.png`)} />
+          </Link>
+        ))}
+      </div>
+    )
+  }
+
   render() {
     const { prefixCls } = this.props
     return (
@@ -98,6 +113,7 @@ class BannerRow extends React.Component<BannerRowProps, BannerRowState> {
           {this.renderLeft()}
           {this.renderRight()}
         </Block.Center>
+        <Block.Center>{this.renderBanner()}</Block.Center>
       </div>
     )
   }

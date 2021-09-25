@@ -31,7 +31,12 @@ class LogoRow extends React.Component<LogoRowProps, {}> {
 
     return (
       <div className={wrapCls}>
-        <Search placeholder="请输入内容" enterButton="搜索" onSearch={this.handleSearch} />
+        <Search
+          style={{ width: 330 }}
+          placeholder="请输入内容"
+          enterButton="搜索"
+          onSearch={this.handleSearch}
+        />
       </div>
     )
   }

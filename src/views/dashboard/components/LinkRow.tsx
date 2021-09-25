@@ -3,10 +3,10 @@ import { Block } from 'src/components'
 import './LinkRow.less'
 
 const imgList = [
-  { key: 'ylrb', url: 'http://www.ylrb.com/' },
   { key: 'nyb', url: 'http://www.moa.gov.cn/' },
   { key: 'sxnyt', url: 'http://nyt.shaanxi.gov.cn/' },
-  { key: 'ylgov', url: 'http://www.yl.gov.cn/' }
+  { key: 'ylgov', url: 'http://www.yl.gov.cn/' },
+  { key: 'ylrb', url: 'http://www.ylrb.com/' }
 ]
 
 interface LinkRowProps {

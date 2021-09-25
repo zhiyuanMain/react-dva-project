@@ -4,10 +4,16 @@
 
     &__img {
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
         align-items: center;
         position: relative;
         width: 100%;
+        flex-wrap: wrap;
+        a {
+            display: block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
 
         img {
             display: block;
@@ -16,21 +22,6 @@
             margin: 0 auto;
             background-color: #fff;
             user-select: none;
-        }
-
-        .swiper-button-prev,
-        .swiper-button-next {
-
-            &:after {
-                color: #787E84;
-                font-size: 18px;
-            }
-        }
-        .swiper-button-prev {
-            left: -35px;
-        }
-        .swiper-button-next {
-            right: -35px;
         }
     }
 
