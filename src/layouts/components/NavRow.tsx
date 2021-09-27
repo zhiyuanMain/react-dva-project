@@ -14,7 +14,7 @@ const NavList: NavListItem[] = [
   { key: 'dashboard', title: '首页' },
   // { key: CHANNEL_CONSTANTS.sjgk, title: CHANNEL_CONSTANTS_CFG.sjgk.name },
   // { key: CHANNEL_CONSTANTS.znjs, title: CHANNEL_CONSTANTS_CFG.znjs.name },
-  { key: CHANNEL_CONSTANTS.wsdc, title: CHANNEL_CONSTANTS_CFG.wsdc.name },
+  // { key: CHANNEL_CONSTANTS.wsdc, title: CHANNEL_CONSTANTS_CFG.wsdc.name },
   { key: CHANNEL_CONSTANTS.zwgk, title: CHANNEL_CONSTANTS_CFG.zwgk.name },
   { key: CHANNEL_CONSTANTS.wmhf, title: CHANNEL_CONSTANTS_CFG.wmhf.name },
   { key: CHANNEL_CONSTANTS.ztzl, title: CHANNEL_CONSTANTS_CFG.ztzl.name },

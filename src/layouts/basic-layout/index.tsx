@@ -2,6 +2,7 @@ import React from 'react'
 import LogoRow from '../components/LogoRow'
 import HeaderRow from '../components/HeaderRow'
 import NavRow from '../components/NavRow'
+import './index.less'
 
 interface BasicLayoutProps {
   prefixCls?: string
@@ -14,6 +15,13 @@ class BasicLayout extends React.Component<BasicLayoutProps, {}> {
 
   static defaultProps = {
     prefixCls: 'suprl-basiclayout'
+  }
+
+  renderBgImg = () => {
+    const { prefixCls } = this.props
+    const wrapCls = `${prefixCls}__bgimg`
+
+    return <img className={wrapCls} src={require('../../assets/img/dashboard-bg.png')} />
   }
 
   renderHeader = () => {
@@ -33,6 +41,7 @@ class BasicLayout extends React.Component<BasicLayoutProps, {}> {
     const { prefixCls, children } = this.props
     return (
       <div className={prefixCls}>
+        {this.renderBgImg()}
         {this.renderHeader()}
         <div className={`${prefixCls}__main`}>{children}</div>
       </div>
