@@ -93,11 +93,18 @@ class GroupRow extends React.Component<GroupRowProps, GroupRowState> {
     const { prefixCls } = this.props
     return (
       <div className={prefixCls}>
-        <Block.Center>
-          <Block.Title icon="group" name="信息公开" />
-        </Block.Center>
-        <Block.Center>{this.renderIntro()}</Block.Center>
-        <Block.Center>{this.renderInfo()}</Block.Center>
+        {
+          // eslint-disable-next-line
+          true ? null : (
+            <React.Fragment>
+              <Block.Center>
+                <Block.Title icon="group" name="信息公开" />
+              </Block.Center>
+              <Block.Center>{this.renderIntro()}</Block.Center>
+              <Block.Center>{this.renderInfo()}</Block.Center>
+            </React.Fragment>
+          )
+        }
       </div>
     )
   }

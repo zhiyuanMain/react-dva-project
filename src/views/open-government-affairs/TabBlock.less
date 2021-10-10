@@ -4,50 +4,126 @@
     width: 100%;
     &__tabs {
         &__item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 240px;
-            height: 70px;
             margin-bottom: 20px;
-            padding: 15px 25px;
-            background-color: #fff;
-            border: 1px solid #E7E7E7;
-            cursor: pointer;
+            &__title {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 240px;
+                height: 70px;
+                padding: 15px 25px;
+                background-color: #fff;
+                border: 1px solid #E7E7E7;
+                cursor: pointer;
+                > img {
+                    display: block;
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 22px;
+                }
+    
+                > div {
+                    flex: 1;
+                    h6 {
+                        position: relative;
+                        margin: 0;
+                        width: 100px;
+                        color: #2E5D9A;
+                        font-size: 23px;
 
-            > img {
-                display: block;
-                width: 40px;
-                height: 40px;
-                margin-right: 22px;
-            }
+                        &.icon {
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                left: 50%;
+                                top: 50%;
+                                width: 12px;
+                                margin-left: 70px;
+                                margin-top: -1px;
+                                border-top: 2px solid;
+                            }
+    
+                            &:after {
+                                content: '';
+                                position: absolute;
+                                left: 50%;
+                                top: 50%;
+                                height: 12px;
+                                margin-left: 75px;
+                                margin-top: -6px;
+                                border-left: 2px solid;
+                            }
+                        }
+                    }
+                }
+            }   
 
-            > div {
-                flex: 1;
-                h6 {
-                    margin: 0;
-                    width: 100px;
-                    color: #2E5D9A;
-                    font-size: 23px;
+
+            &.active {
+                .open-government-affairs-page__tabblock__tabs__item__title {
+                    background-color: #2D66A4;
+                    h6 {
+                        color: #fff;
+
+                        &.icon {
+                            &:after {
+                                display: none;
+                            }
+                        }
+                    }
                 }
             }
 
-            &-active {
-                background-color: #2D66A4;
-                > div {
-                    h6 {
-                        color: #fff;
+
+            &__collapselist {
+                margin-top: 10px;
+                li {
+                    position: relative;
+                    line-height: 32px;
+                    font-size: 15px;
+                    text-align: center;
+                    cursor: pointer;
+
+                    &.active {
+                        background-color: #e6f5ff;
+                        color: #2b66a5;
                     }
+
                 }
             }
 
         }
     }
 
-    &__list {
+    &__content {
+        display: flex;
+        flex-direction: column;
         flex: 1;
         margin-left: 30px;
         overflow: hidden;
     }
-    
+
+    &__list {
+        flex: 1;
+        max-height: 560px;
+        overflow: auto;
+
+        .suprc-panel-list__morebtn {
+            a {
+                display: block;
+                width: 100px;
+                height: 30px;
+                text-align: center;
+                line-height: 30px;
+                background-color: #e6e6e6;
+                color: #8c8c8c;
+            }
+        }
+    }
+
+    &__pagination {
+        height: 32px;
+        margin-top: 5px;
+        text-align: right;
+    }
 }

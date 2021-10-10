@@ -16,6 +16,7 @@ interface PanelListProps {
   textOverhidden: number
   height?: string | number
   type?: ChannelContentType
+  moreText?: string
 }
 
 class PanelList extends React.Component<PanelListProps, {}> {
@@ -26,11 +27,12 @@ class PanelList extends React.Component<PanelListProps, {}> {
   static defaultProps = {
     prefixCls: 'suprc-panel-list',
     textOverhidden: 1,
-    shouldRenderTime: true
+    shouldRenderTime: true,
+    moreText: '更多>>'
   }
 
   render() {
-    const { prefixCls, list, shouldRenderTime, textOverhidden, height, type } = this.props
+    const { prefixCls, list, shouldRenderTime, textOverhidden, height, type, moreText } = this.props
     let liStyles = {}
     if (textOverhidden > 1) {
       liStyles = {
@@ -51,9 +53,9 @@ class PanelList extends React.Component<PanelListProps, {}> {
           </dd>
         ))}
         {type ? (
-          <dt>
+          <dt className={`${prefixCls}__morebtn`}>
             <Link style={liStyles} to={`/list/${type}`}>
-              {'更多>>'}
+              {moreText}
             </Link>
           </dt>
         ) : null}

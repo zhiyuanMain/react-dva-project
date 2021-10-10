@@ -1,17 +1,23 @@
 import requestProxy from 'src/utils/request'
 import { LinkItem } from './index'
-type GovInfoItem = {
+export type GovInfoItem = {
   list: LinkItem[]
   name: string
   path: string
   to?: string
 }
+
+export type Path = {
+  path: string
+  title: string
+}
 export interface ResGovInfo {
   level: number
   list: GovInfoItem[]
+  paths?: Path[]
 }
-export const req = () =>
+export const req = (key: string) =>
   requestProxy<ResGovInfo>({
     method: 'get',
-    url: '/list/zfxxgk'
+    url: `/list/${key}`
   })
