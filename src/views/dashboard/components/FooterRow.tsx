@@ -21,11 +21,30 @@ class FooterRow extends React.Component<FooterRowProps, {}> {
 
     return (
       <div className={wrapCls}>
-        <img src={require('src/assets/img/type.png')} />
+        <a
+          target="_blank"
+          href="http://bszs.conac.cn/sitename?method=show&id=4FAF54D2A68D5963E053012819ACEE33"
+          rel="noreferrer">
+          <img src={require('src/assets/img/type.png')} />
+        </a>
         <article>
-          <address>地址：榆林市兴榆路榆林农业大厦 主办单位</address>
-          <p>E-mail：ylnyxxw@126.com 陕ICP备20005710 网站标识码：6108000013</p>
-          <p>电话：0912－6662688 陕公网安备 61080202000240号</p>
+          <address>地址：陕西省榆林市榆阳区榆林大道158号 主办单位: 榆林市农业农村局</address>
+          <p>
+            E-mail：ylnyxxw@126.com{' '}
+            <a target="_blank" href="https://beian.miit.gov.cn/" rel="noreferrer">
+              陕ICP备20005710号
+            </a>{' '}
+            网站标识码：6108000013
+          </p>
+          <p>
+            电话：0912－6662688{' '}
+            <a
+              target="_blank"
+              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=61080202000240"
+              rel="noreferrer">
+              陕公网安备 61080202000240号
+            </a>
+          </p>
         </article>
       </div>
     )

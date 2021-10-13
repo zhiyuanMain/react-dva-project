@@ -9,6 +9,7 @@ import { connect } from 'dva'
 type NavListItem = {
   key: string
   title: string
+  url?: string
 }
 const NavList: NavListItem[] = [
   { key: 'dashboard', title: '首页' },
@@ -18,7 +19,12 @@ const NavList: NavListItem[] = [
   { key: CHANNEL_CONSTANTS.zwgk, title: CHANNEL_CONSTANTS_CFG.zwgk.name },
   { key: CHANNEL_CONSTANTS.wmhf, title: CHANNEL_CONSTANTS_CFG.wmhf.name },
   { key: CHANNEL_CONSTANTS.ztzl, title: CHANNEL_CONSTANTS_CFG.ztzl.name },
-  { key: CHANNEL_CONSTANTS.dflz, title: CHANNEL_CONSTANTS_CFG.dflz.name }
+  // { key: CHANNEL_CONSTANTS.dflz, title: CHANNEL_CONSTANTS_CFG.dflz.name }
+  {
+    key: CHANNEL_CONSTANTS.bsfw,
+    title: CHANNEL_CONSTANTS_CFG.bsfw.name,
+    url: 'http://zwfw.yl.gov.cn/yl-web-zwdt/epointzwmhwz/pages/eventdetail/wanttodo_new?bltype=ou&isnormal=1&vname=610800&areacode=610800&ztvalue=b8495463-2b30-4530-94ef-040bb363571d'
+  }
 ]
 
 interface NavRowProps {
@@ -48,7 +54,11 @@ class NavRow extends React.Component<NavRowProps, {}> {
             mode="horizontal">
             {NavList.map((item) => (
               <Menu.Item key={item.key} style={{ width: 1200 / NavList.length }}>
-                {item.key === 'dashboard' ? (
+                {item.url ? (
+                  <a target="_blank" href={item.url} rel="noreferrer">
+                    {item.title}
+                  </a>
+                ) : item.key === 'dashboard' ? (
                   <Link to={'/dashboard'}>{item.title}</Link>
                 ) : item.key === CHANNEL_CONSTANTS.zwgk ? (
                   <Link to={`/${item.key}`}>{item.title}</Link>

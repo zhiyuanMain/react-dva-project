@@ -16,14 +16,13 @@ const imgList = [
     title: '我要留言',
     subTitle: '留下您想说的话'
   },
-  {
-    png: 'guide',
-    key: CHANNEL_CONSTANTS.bszn,
-    type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.bszn].type,
-    url: 'http://zwfw.yl.gov.cn/yl-web-zwdt/epointzwmhwz/pages/eventdetail/wanttodo_new?bltype=ou&isnormal=1&vname=610800&areacode=610800&ztvalue=b8495463-2b30-4530-94ef-040bb363571d',
-    title: '办事指南',
-    subTitle: '为您排忧解难'
-  },
+  // {
+  //   png: 'guide',
+  //   key: CHANNEL_CONSTANTS.dflz,
+  //   type: CHANNEL_CONSTANTS_CFG[CHANNEL_CONSTANTS.dflz].type,
+  //   title: '党风廉政',
+  //   subTitle: '排忧解难办实事'
+  // },
   {
     png: 'excel',
     key: CHANNEL_CONSTANTS.bgxz,
@@ -176,9 +175,9 @@ class OnlineRow extends React.Component<OnlineRowProps, OnlineRowState> {
     const { prefixCls } = this.props
     return (
       <div className={prefixCls}>
-        <Block.Center>
+        {/* <Block.Center>
           <Block.Title icon="group" name="网上调查" />
-        </Block.Center>
+        </Block.Center> */}
         <Block.Center>{this.renderIntro()}</Block.Center>
         <Block.Center>{this.renderInfo()}</Block.Center>
       </div>

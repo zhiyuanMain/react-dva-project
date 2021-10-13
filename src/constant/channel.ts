@@ -9,7 +9,7 @@ const channelList = tuple(
   'wmhf', // 网民回复 特殊2
   'lyb', // 留言板   特殊3
   'ztzl', // 专题专栏
-  'bszn', // 办事指南 第三方链接
+  'bsfw', // 办事服务 第三方链接
   'zxyw', // 最新要闻
   'tzgg', // 通知公告
   'qxdt', // 区县动态
@@ -54,7 +54,7 @@ export const CHANNEL_CONSTANTS_CFG = {
   [`${CHANNEL_CONSTANTS.wmhf}`]: { name: '网民回复', type: 'privateLink2' },
   [`${CHANNEL_CONSTANTS.lyb}`]: { name: '我要留言', type: 'privateLink3' },
   [`${CHANNEL_CONSTANTS.ztzl}`]: { name: '专题专栏', type: 'list' },
-  [`${CHANNEL_CONSTANTS.bszn}`]: { name: '办事指南', type: 'hyperLink' },
+  [`${CHANNEL_CONSTANTS.bsfw}`]: { name: '办事服务', type: 'hyperLink' },
   [`${CHANNEL_CONSTANTS.zxyw}`]: { name: '最新要闻', type: 'list' },
   [`${CHANNEL_CONSTANTS.tzgg}`]: { name: '通知公告', type: 'list' },
   [`${CHANNEL_CONSTANTS.qxdt}`]: { name: '区县动态', type: 'list' },
