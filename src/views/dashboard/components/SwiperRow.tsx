@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
 import './SwiperRow.less'
 
-const imgList = ['gbzfjzzdzl', 'ylszcxdnyfzzczl', 'wzgzbb']
+const imgList = ['gbzfjzzdzl', 'xdnyfz', 'zfwzgzbg']
 interface SwiperRowProps {
   prefixCls?: string
 }
