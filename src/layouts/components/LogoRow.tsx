@@ -1,7 +1,8 @@
 import React from 'react'
 import { Input } from 'antd'
 import { Block } from 'src/components'
-import logo from 'src/assets/img/logo.png'
+import logo from 'src/assets/img/logo-text.png'
+import nationalEmblem from 'src/assets/img/national-emblem.png'
 import './LogoRow.less'
 import { Link } from 'dva/router'
 
@@ -46,6 +47,7 @@ class LogoRow extends React.Component<LogoRowProps, {}> {
       <div className={prefixCls}>
         <Block.Center style={{ height: 117 }}>
           <Link to="/dashboard">
+            <img src={nationalEmblem} className={`${prefixCls}__national`} />
             <img src={logo} className={`${prefixCls}__logo`} />
           </Link>
           {this.renderSearch()}
