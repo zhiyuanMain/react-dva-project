@@ -12,6 +12,7 @@ import startUp from './utils/startUp'
 import { LangProps, LangUnionProps, ThemeModeProps } from './interfaces/config'
 import zhCN from 'antd/lib/locale/zh_CN'
 import enUS from 'antd/lib/locale/en_US'
+import { GlobalModal } from './components'
 
 interface RootProps {
   langUnion: LangUnionProps
@@ -55,7 +56,10 @@ class Root extends React.Component<RootProps, {}> {
       <AppContainer>
         <ConfigProvider locale={this.antdLocale}>
           <I18nextProvider i18n={i18nConfig(lang, langUnion)}>
-            <App />
+            <React.Fragment>
+              <GlobalModal />
+              <App />
+            </React.Fragment>
           </I18nextProvider>
         </ConfigProvider>
       </AppContainer>
