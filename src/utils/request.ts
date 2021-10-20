@@ -116,6 +116,10 @@ methods.forEach((v: HttpMethod) => {
     }
 
     function handleError(err: AxiosError, requestParams: HttpRequestParams) {
+      if (err.response?.status === 388) {
+        printLog.warning(`redirect: ${err.response.headers}`)
+        window.location.href = err.response.headers.nyjlocation || '/'
+      }
       if (err.response) {
         printLog.error(`api: ${requestParams.url}: ${err.response.status}`)
       }
