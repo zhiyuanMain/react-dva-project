@@ -1,4 +1,5 @@
 import { Breadcrumb } from 'antd'
+import classNames from 'classnames'
 import { Link } from 'dva/router'
 import React from 'react'
 import gateway from 'src/services/gateway'
@@ -112,6 +113,14 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
                 next: nextItem ? { title: nextItem.title, id: nextItem.id } : {}
               }
             })
+
+            const containerDivs = document.getElementsByClassName('_ARTICLE_PAGE_')[0]
+            const range = document.createRange()
+            // // make the parent of the first div in the document becomes the context node
+            range.selectNode(containerDivs)
+            const documentFragment = range.createContextualFragment(res.body)
+            const containerMain = document.getElementById('_ARTICLE_PAGE_main')
+            containerMain?.appendChild(documentFragment)
           })
         }
       )
@@ -120,8 +129,13 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
 
   renderRow = (rowCls: string, content: React.ReactNode) => {
     const { prefixCls } = this.props
-    const wrapCls = `${prefixCls}__${rowCls}`
-    return <div className={wrapCls}>{content}</div>
+    const isMainBox = rowCls === 'main'
+    const wrapCls = classNames([`${prefixCls}__${rowCls}`, isMainBox ? '_ARTICLE_PAGE_' : ''])
+    return (
+      <div className={wrapCls} id={`_ARTICLE_PAGE_${rowCls}`}>
+        {content}
+      </div>
+    )
   }
 
   renderBreadcrumb = () => {
@@ -160,13 +174,10 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
     return this.renderRow('info', content)
   }
   renderMain = () => {
-    const { main } = this.state
-    const content = <div dangerouslySetInnerHTML={{ __html: main }}></div>
-    return this.renderRow('main', content)
+    return this.renderRow('main', null)
   }
   renderFooter = () => {
     const { refs } = this.state
-    console.log(refs)
     const renderLink = (data: Partial<RefInfo>, spanText: string, type: 'prev' | 'next') =>
       data && Object.keys(data || {}).length ? (
         <span>
