@@ -38,10 +38,10 @@ class BannerRow extends React.Component<BannerRowProps, BannerRowState> {
     gateway.news.req().then((res) => {
       this.setState({
         newsList: [
-          { tabTitle: '要闻新闻', list: convertLinkData([...res.realtimeNews]) },
-          { tabTitle: '最新通知', list: convertLinkData([...res.noticeMsg]) },
-          { tabTitle: '区县动态', list: convertLinkData([...res.qxdt]) },
-          { tabTitle: '党风廉政', list: convertLinkData([...res.dflz]) }
+          { tabTitle: '要闻新闻', list: convertLinkData([...res.realtimeNews]), type: 'ywxw' },
+          { tabTitle: '最新通知', list: convertLinkData([...res.noticeMsg]), type: 'zxtz' },
+          { tabTitle: '区县动态', list: convertLinkData([...res.qxdt]), type: 'qxdt' },
+          { tabTitle: '党风廉政', list: convertLinkData([...res.dflz]), type: 'dflz' }
         ]
       })
     })

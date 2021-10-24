@@ -104,7 +104,7 @@ methods.forEach((v: HttpMethod) => {
         }
 
         if (requestParams.responseType === 'json') {
-          return filter ? result.data : response.data
+          return filter ? result?.data : response?.data
         } else {
           return response.data
         }

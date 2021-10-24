@@ -1,0 +1,46 @@
+.article-page-harticle-votes {
+    
+    &__modalcontent {
+        margin: 0;
+        max-height: 500px;
+        overflow: auto;
+
+        dl {
+            dt,
+            dd {
+                padding: 5px 0;
+            }
+            dt {
+                font-weight: 500;
+            }
+            dd {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 5px 20px;
+                
+                > span {
+                    display: block;
+                    width: 60px;
+                    text-align: right;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+
+                    &:first-child {
+                        width: 100px;
+                        white-space: inherit;
+                        text-align: left;
+                    }
+                }
+                > div {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex: 1;
+                }
+            }
+        }
+        
+    }
+}

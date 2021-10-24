@@ -1,10 +1,12 @@
-import { Breadcrumb } from 'antd'
+import { Breadcrumb, Spin } from 'antd'
 import classNames from 'classnames'
 import { Link } from 'dva/router'
 import React from 'react'
 import gateway from 'src/services/gateway'
+import { Vote } from 'src/services/gateway/article'
 import { formatTime } from 'src/utils/helper'
 import './HArticle.less'
+import HVotes from './HVotes'
 
 interface HArticleProps {
   prefixCls?: string
@@ -31,13 +33,21 @@ type RefInfo = {
   id: number | string
 }
 interface HArticleState {
+  isLoading: boolean
   breadcrumb: BreadcrumbListItem[]
   title: string
   info: Info
-  main: string
+  body: string
   refs: {
     prev: Partial<RefInfo>
     next: Partial<RefInfo>
+  }
+  // 投票相关信息
+  voteRef: {
+    list: Vote[]
+    status: string
+    beginTime: number
+    endTime: number
   }
 }
 
@@ -58,6 +68,7 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
   }
 
   state: HArticleState = {
+    isLoading: true,
     breadcrumb: [],
     title: '',
     info: {
@@ -66,10 +77,16 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
       src: '',
       author: ''
     },
-    main: '',
+    body: '',
     refs: {
       prev: {},
       next: {}
+    },
+    voteRef: {
+      list: [],
+      status: '',
+      beginTime: new Date().getTime(),
+      endTime: new Date().getTime()
     }
   }
 
@@ -88,6 +105,7 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
     gateway.article.req(this.props.id).then((res) => {
       this.setState(
         {
+          isLoading: true,
           breadcrumb: res.paths.map((item) => ({
             category: 'link',
             title: item.title,
@@ -100,40 +118,60 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
             src: res.source,
             author: res.author
           },
-          main: res.body
+          body: res.body || '',
+          voteRef: {
+            status: res.tpzt || '',
+            list: res.votes || [],
+            beginTime: res.publishTime || new Date().getTime(),
+            endTime: res.updateTime || new Date().getTime()
+          }
         },
         () => {
           // 请求上一篇下一篇
           gateway.articleRef.req(res.columnId, this.props.id).then((rres) => {
             const prevItem = rres.find((item) => item.sort === '0')
             const nextItem = rres.find((item) => item.sort === '1')
-            this.setState({
-              refs: {
-                prev: prevItem ? { title: prevItem.title, id: prevItem.id } : {},
-                next: nextItem ? { title: nextItem.title, id: nextItem.id } : {}
+            this.setState(
+              {
+                refs: {
+                  prev: prevItem ? { title: prevItem.title, id: prevItem.id } : {},
+                  next: nextItem ? { title: nextItem.title, id: nextItem.id } : {}
+                }
+              },
+              () => {
+                setTimeout(() => {
+                  this.setState({ isLoading: false })
+                  if (!this.state.voteRef.list.length) {
+                    this.fillContent(this.state.body)
+                  }
+                }, 300)
               }
-            })
-
-            const containerDivs = document.getElementsByClassName('_ARTICLE_PAGE_')[0]
-            const range = document.createRange()
-            // // make the parent of the first div in the document becomes the context node
-            range.selectNode(containerDivs)
-            const documentFragment = range.createContextualFragment(res.body)
-            const containerMain = document.getElementById('_ARTICLE_PAGE_main')
-            containerMain?.appendChild(documentFragment)
+            )
           })
         }
       )
     })
   }
 
+  fillContent = (content: string) => {
+    const containerDivs = document.getElementsByClassName('_ARTICLE_PAGE_')[0]
+    const range = document.createRange()
+    // // make the parent of the first div in the document becomes the context node
+    range.selectNode(containerDivs)
+    const documentFragment = range.createContextualFragment(content)
+    const containerMain = document.getElementById('_ARTICLE_PAGE_main')
+    containerMain?.appendChild(documentFragment)
+  }
+
   renderRow = (rowCls: string, content: React.ReactNode) => {
     const { prefixCls } = this.props
+    const { voteRef } = this.state
+    const { list } = voteRef
     const isMainBox = rowCls === 'main'
     const wrapCls = classNames([`${prefixCls}__${rowCls}`, isMainBox ? '_ARTICLE_PAGE_' : ''])
     return (
       <div className={wrapCls} id={`_ARTICLE_PAGE_${rowCls}`}>
-        {content}
+        {isMainBox && list.length ? <HVotes list={list} onAfterSuccess={this.getData} /> : content}
       </div>
     )
   }
@@ -162,8 +200,14 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
     return this.renderRow('title', content)
   }
   renderInfo = () => {
-    const { info } = this.state
-    const content = (
+    const { info, voteRef } = this.state
+    const { list, status, beginTime, endTime } = voteRef
+    const content = list.length ? (
+      <HVotes.Breadcrumb
+        status={status}
+        beginTime={beginTime}
+        endTime={endTime}></HVotes.Breadcrumb>
+    ) : (
       <React.Fragment>
         <span>{info.time}</span>
         <span>点击：{info.count}</span>
@@ -200,6 +244,15 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
 
   render() {
     const { prefixCls, shouldRenderBreadcrumb, shouldRenderFooter, shouldRenderInfo } = this.props
+    if (this.state.isLoading) {
+      return (
+        <div className={prefixCls}>
+          <div className={`${prefixCls}__spin`}>
+            <Spin></Spin>
+          </div>
+        </div>
+      )
+    }
     return (
       <div className={prefixCls}>
         {shouldRenderBreadcrumb && this.renderBreadcrumb()}
