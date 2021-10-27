@@ -14,7 +14,7 @@ export type Vote = {
   items: VoteItem[]
   title: string
   totalNum: number
-  type: number
+  type: 1 | 2 | 3 // 1单选 2多选 输入框
 }
 
 export type VoteItem = {

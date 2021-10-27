@@ -164,14 +164,18 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
   }
 
   renderRow = (rowCls: string, content: React.ReactNode) => {
-    const { prefixCls } = this.props
-    const { voteRef } = this.state
-    const { list } = voteRef
+    const { prefixCls, id } = this.props
+    const { voteRef, title } = this.state
+    const { list, status } = voteRef
     const isMainBox = rowCls === 'main'
     const wrapCls = classNames([`${prefixCls}__${rowCls}`, isMainBox ? '_ARTICLE_PAGE_' : ''])
     return (
       <div className={wrapCls} id={`_ARTICLE_PAGE_${rowCls}`}>
-        {isMainBox && list.length ? <HVotes list={list} onAfterSuccess={this.getData} /> : content}
+        {isMainBox && list.length ? (
+          <HVotes title={title} id={id} status={status} list={list} onAfterSuccess={this.getData} />
+        ) : (
+          content
+        )}
       </div>
     )
   }
