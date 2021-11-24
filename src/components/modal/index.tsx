@@ -29,7 +29,7 @@ class Modal extends React.Component<ModalProps, ModalState> {
 
   render() {
     const { visible } = this.state
-    if (process.env.NODE_ENV === 'development') return null
+    // if (process.env.NODE_ENV === 'development') return null
     return (
       <AntdModal
         visible={visible}

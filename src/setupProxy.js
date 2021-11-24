@@ -4,7 +4,8 @@ module.exports = function (app) {
   app.use(
     proxy('/api', {
       // target: 'http://42.192.150.24:39118',
-      target: 'http://39.99.41.238',
+      // target: 'http://39.99.41.238',
+      target: 'http://nyj.yl.gov.cn/',
       changeOrigin: true,
       pathRewrite: {
         '^/api': '/api'
@@ -12,7 +13,8 @@ module.exports = function (app) {
     }),
     proxy('/upload/image', {
       // target: 'http://42.192.150.24:39118',
-      target: 'http://39.99.41.238',
+      // target: 'http://39.99.41.238',
+      target: 'http://nyj.yl.gov.cn/',
       changeOrigin: true
     })
   )
