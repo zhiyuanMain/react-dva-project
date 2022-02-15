@@ -51,6 +51,14 @@ const allRoutes: RouteItem[] = [
         component: React.lazy(
           () => import(/* webpackChunkName: "page-form-msg-board" */ '../views/search')
         )
+      },
+      {
+        title: 'Application',
+        isDynamic: true,
+        path: '/application',
+        component: React.lazy(
+          () => import(/* webpackChunkName: "page-application" */ '../views/application')
+        )
       }
     ]
   },

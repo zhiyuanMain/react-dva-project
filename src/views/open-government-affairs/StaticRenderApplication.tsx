@@ -174,7 +174,7 @@ class StaticRenderApplication extends React.Component<
         </section>
         <section className={`${prefixCls}__linkrow`}>
           <Button type="primary" disabled={currentCount > 0}>
-            {currentCount ? `${currentCount}s 我要申请` : <Link to="/">我要申请</Link>}
+            {currentCount ? `${currentCount}s 我要申请` : <Link to="/application">我要申请</Link>}
           </Button>
         </section>
       </div>
