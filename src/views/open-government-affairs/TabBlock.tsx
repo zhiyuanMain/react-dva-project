@@ -6,6 +6,7 @@ import { GovInfoItem } from 'src/services/gateway/govInfo'
 import gateway from 'src/services/gateway'
 import { formatTime } from 'src/utils/helper'
 import { Empty, Pagination } from 'antd'
+import StaticRenderApplication from './StaticRenderApplication'
 
 const genImg = (index: number, isSelected = false) => {
   const imgName = !isSelected ? `icon_tab_${index}` : `icon_tab_${index}_select`
@@ -13,10 +14,12 @@ const genImg = (index: number, isSelected = false) => {
 }
 
 const TAB_BLOCK_LIST = [
+  // { key: 'ysqgk', title: '依申请公开', isCollapse: false, isStatic: true },
   { key: 'zfxxgkzn', title: '政府信息公开指南', isCollapse: false },
   { key: 'zfxxgkzd', title: '政府信息公开制度', isCollapse: false },
   { key: 'fdzdgknr', title: '法定主动公开内容', isCollapse: true },
-  { key: 'zfxxgknb', title: '政府信息公开年报', isCollapse: false }
+  { key: 'zfxxgknb', title: '政府信息公开年报', isCollapse: false },
+  { key: 'ysqgk', title: '依申请公开', isCollapse: false, isStatic: true }
 ]
 interface TabBlockProps {
   prefixCls?: string
@@ -31,6 +34,7 @@ interface TabBlockState {
   currentPage: number
   total: number
   isLoading: boolean
+  staticRender: boolean
 }
 class TabBlock extends React.Component<TabBlockProps, TabBlockState> {
   constructor(props: TabBlockProps | Readonly<TabBlockProps>) {
@@ -45,7 +49,8 @@ class TabBlock extends React.Component<TabBlockProps, TabBlockState> {
     collapseList: [],
     collapseKey: '',
     currentPage: 1,
-    total: 0
+    total: 0,
+    staticRender: TAB_BLOCK_LIST[0].isStatic || false
   }
 
   static defaultProps = {
@@ -56,6 +61,7 @@ class TabBlock extends React.Component<TabBlockProps, TabBlockState> {
     this.genData(TAB_BLOCK_LIST[0].key, 1)
   }
   genData = (key: string, pageNumber: number) => {
+    if (this.state.staticRender) return
     this.setState(
       {
         isLoading: true
@@ -96,16 +102,25 @@ class TabBlock extends React.Component<TabBlockProps, TabBlockState> {
   handleSwitch = (key: string) => {
     const { isLoading, activeKey } = this.state
     if (isLoading || activeKey === key) return
-    const activeKeyIsCollapse = TAB_BLOCK_LIST.find((item) => item.key === key)?.isCollapse || false
+    const currentItem = TAB_BLOCK_LIST.find((item) => item.key === key)
+    const activeKeyIsCollapse = currentItem?.isCollapse || false
     this.setState(
       {
         activeKey: key,
         total: 0,
         currentPage: 1,
-        activeKeyIsCollapse
+        activeKeyIsCollapse,
+        staticRender: false
       },
       () => {
-        this.genData(key, 1)
+        // 静态页面
+        if (currentItem?.isStatic) {
+          this.setState({
+            staticRender: true
+          })
+        } else {
+          this.genData(key, 1)
+        }
       }
     )
   }
@@ -181,7 +196,14 @@ class TabBlock extends React.Component<TabBlockProps, TabBlockState> {
   renderContent = () => {
     const { prefixCls } = this.props
     const wrapCls = `${prefixCls}__content`
-    const { activeKeyIsCollapse } = this.state
+    const { activeKeyIsCollapse, staticRender } = this.state
+    if (staticRender) {
+      return (
+        <div className={wrapCls}>
+          <StaticRenderApplication />
+        </div>
+      )
+    }
     return (
       <div className={wrapCls}>
         {this.renderList()}
