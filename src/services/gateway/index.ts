@@ -9,6 +9,7 @@ import * as msgboardList from './msgboardList'
 import * as sendMsg from './sendMsg'
 import * as groupBanner from './groupBanner'
 import * as search from './search'
+import * as sendApplication from './sendApplication'
 
 export interface LinkItem {
   id: string
@@ -30,7 +31,8 @@ const gateway = {
   msgboardList,
   sendMsg,
   groupBanner,
-  search
+  search,
+  sendApplication
 }
 
 export default gateway

@@ -129,7 +129,7 @@ class Msgboard extends React.Component<MsgboardProps, MsgboardState> {
             name="phone"
             rules={[
               { required: true, message: '请输入手机号码' },
-              { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号' }
+              { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号码' }
             ]}>
             <Input maxLength={11} />
           </Form.Item>
