@@ -7,6 +7,7 @@ import {
   Input,
   message,
   Radio,
+  RadioChangeEvent,
   Row,
   Select,
   Upload
@@ -19,20 +20,9 @@ import { Block } from 'src/components'
 import './index.less'
 import gateway from 'src/services/gateway'
 import { SendApplicationReqParams } from 'src/services/gateway/sendApplication'
+import FooterRow from '../dashboard/components/FooterRow'
+import pickerrorImg from 'src/assets/img/pickerror.png'
 
-interface ApplicationProps {
-  prefixCls?: string
-}
-interface ApplicationState {
-  breadcrumb: BreadcrumbListItem[]
-  fileListFront: UploadFile[]
-  fileListReide: UploadFile[]
-}
-type BreadcrumbListItem = {
-  title: string
-  path?: string
-  category: 'text' | 'link'
-}
 const BREADCRUMBLIST: BreadcrumbListItem[] = [
   { title: '首页', path: '/', category: 'link' },
   { title: '政务公开', path: '/zwgk', category: 'link' },
@@ -52,11 +42,36 @@ const INIT_VALUES: SendApplicationReqParams = {
   alcMail: '', // 电子邮箱
   alcAddress: '', // 通讯地址
   alcPostcode: '', // 邮政编码
+  alcOrganizationCode: '', // 组织机构代码
+  alcLicenseCode: '', // 营业执照代码
+  alcLegal: '', // 法人代表
+  alcContacts: '', // 联系人
+  alcAttachmentScanning: '', // 法人证件扫描件或照片
   infoDesc: '', // 所需信息描述
   infoTarget: '', // 用途描述
   infoPublic: '是', // 是否公开
   infoProvider: '纸质' // 信息的制定提供方式
 }
+
+const CURRENTALCTYPE = ['公民', '法人或者其他组织']
+
+interface ApplicationProps {
+  prefixCls?: string
+}
+interface ApplicationState {
+  breadcrumb: BreadcrumbListItem[]
+  fileListFront: UploadFile[]
+  fileListReide: UploadFile[]
+  fileListScanning: UploadFile[]
+  currentAlcType: string
+  shouldRenderForm: boolean
+}
+type BreadcrumbListItem = {
+  title: string
+  path?: string
+  category: 'text' | 'link'
+}
+
 class Application extends React.Component<ApplicationProps, ApplicationState> {
   constructor(props: ApplicationProps | Readonly<ApplicationProps>) {
     super(props)
@@ -69,78 +84,124 @@ class Application extends React.Component<ApplicationProps, ApplicationState> {
   state: ApplicationState = {
     breadcrumb: [...BREADCRUMBLIST],
     fileListFront: [],
-    fileListReide: []
+    fileListReide: [],
+    fileListScanning: [],
+    currentAlcType: INIT_VALUES.alcType,
+    shouldRenderForm: true
   }
 
   formRef = React.createRef<FormInstance>()
 
-  genUploadProps = (type: 'Front' | 'Reide'): UploadProps => ({
+  genUploadProps = (type: 'Front' | 'Reide' | 'Scanning'): UploadProps => ({
+    // action: '/upload/image/api/yihegui/uploadyhg.jsp',
+    // action: 'https://nyj.yl.gov.cn/api/yihegui/uploadyhg.jsp',
+    action: '/api/yihegui/uploadyhg.jsp',
     onRemove: (file) => {
       const isFront = type === 'Front'
       const fileList = isFront ? [...this.state['fileListFront']] : [...this.state['fileListReide']]
       const index = fileList.indexOf(file)
       const newFileList = fileList.slice()
       newFileList.splice(index, 1)
-      if (isFront) {
-        this.setState({
-          fileListFront: newFileList
-        })
-      } else {
-        this.setState({
-          fileListReide: newFileList
-        })
-      }
+      const key = `fileList${type}`
+      const newState = { [key]: newFileList } as any
+      this.setState({
+        ...newState
+      })
     },
     beforeUpload: (file) => {
       const isImage = file.type.indexOf('image/') > -1
       if (!isImage) {
-        message.error('请上传图片类型的文件')
+        message.error('请上传图片类型的文件！')
       } else {
-        const isFront = type === 'Front'
-        const prevList =
-          type === 'Front' ? [...this.state['fileListFront']] : [...this.state['fileListReide']]
-        if (isFront) {
-          this.setState({
-            fileListFront: [...prevList, file]
-          })
-        } else {
-          this.setState({
-            fileListReide: [...prevList, file]
-          })
-        }
+        const key = `fileList${type}`
+        const prevList = [...this.state[`fileList${type}`]]
+        const newState = { [key]: [...prevList, file] } as any
+        this.setState({
+          ...newState
+        })
       }
-      return false
+      return isImage
+    },
+    onChange: (info) => {
+      const { file } = info
+      const key = `fileList${type}`
+      if (file.status === 'done') {
+        const newState = { [key]: [file] } as any
+        this.setState({
+          ...newState
+        })
+      }
+      if (file.status === 'error') {
+        message.error('上传失败，请重试')
+        const newState = { [key]: [] } as any
+        this.setState({
+          ...newState
+        })
+      }
     }
   })
 
+  handleAlcTyleChange = (e: RadioChangeEvent) => {
+    this.setState({
+      currentAlcType: e.target.value
+    })
+  }
+
   onFinish = (values: any) => {
-    if (this.state.fileListFront.length <= 0) {
-      this.formRef.current?.setFieldsValue({
-        alcAttachmentFront: ''
-      })
-      this.formRef.current?.validateFields()
-      return
+    message.success('您的申请我们已收到，我们会尽快处理！正在跳转至首页')
+    this.setState({
+      shouldRenderForm: false
+    })
+    setTimeout(() => {
+      window.location.href = '/'
+    }, 3000)
+    const { currentAlcType, fileListFront, fileListReide, fileListScanning } = this.state
+    const isPerson = currentAlcType === CURRENTALCTYPE[0]
+    if (isPerson) {
+      if (fileListFront.length <= 0) {
+        this.formRef.current?.setFieldsValue({
+          alcAttachmentFront: ''
+        })
+        this.formRef.current?.validateFields()
+        return
+      }
+      if (fileListReide.length <= 0) {
+        this.formRef.current?.setFieldsValue({
+          alcAttachmentReide: ''
+        })
+        this.formRef.current?.validateFields()
+        return
+      }
+    } else {
+      if (fileListScanning.length <= 0) {
+        this.formRef.current?.setFieldsValue({
+          alcAttachmentScanning: ''
+        })
+        this.formRef.current?.validateFields()
+        return
+      }
     }
-    if (this.state.fileListReide.length <= 0) {
-      this.formRef.current?.setFieldsValue({
-        alcAttachmentReide: ''
-      })
-      this.formRef.current?.validateFields()
-      return
-    }
-    const { alcAttachmentFront, alcAttachmentReide, ...rest } = values
+
+    const { alcAttachmentFront, alcAttachmentReide, alcAttachmentScanning, ...rest } = values
     const requestJson: SendApplicationReqParams = {
       ...rest,
-      alcType: encodeURIComponent(rest.alcType),
-      alcCertType: encodeURIComponent(rest.alcCertType),
-      infoPublic: encodeURIComponent(rest.infoPublic),
-      infoProvider: encodeURIComponent(rest.infoProvider),
-      alcAttachmentFront: alcAttachmentFront.file,
-      alcAttachmentReide: alcAttachmentReide.file
+      alcType: rest.alcType,
+      alcCertType: rest.alcCertType,
+      infoPublic: rest.infoPublic,
+      infoProvider: rest.infoProvider,
+      alcAttachmentFront: isPerson ? alcAttachmentFront.file.response[0].url : '',
+      alcAttachmentReide: isPerson ? alcAttachmentReide.file.response[0].url : '',
+      alcAttachmentScanning: isPerson ? '' : alcAttachmentScanning.file.response[0].url
     }
     gateway.sendApplication.req({ ...requestJson }).then((res) => {
       if (res.success) {
-        message.success('您的申请我们已收到，我们会尽快处理！')
+        message.success('您的申请我们已收到，我们会尽快处理！正在跳转至首页')
+        this.setState({
+          shouldRenderForm: false
+        })
+        setTimeout(() => {
+          window.location.href = '/'
+        }, 3000)
       }
     })
   }
@@ -199,7 +260,7 @@ class Application extends React.Component<ApplicationProps, ApplicationState> {
         <Form.Item name="alcType">
           {this.renderRow(
             'item',
-            <Radio.Group defaultValue={INIT_VALUES.alcType}>
+            <Radio.Group defaultValue={INIT_VALUES.alcType} onChange={this.handleAlcTyleChange}>
               <Radio value="公民">公民</Radio>
               <Radio value="法人或者其他组织">法人或者其他组织</Radio>
             </Radio.Group>
@@ -208,70 +269,128 @@ class Application extends React.Component<ApplicationProps, ApplicationState> {
         {this.renderRow(
           'item',
           <>
-            <Row>
-              <Col span={10}>
-                <Form.Item
-                  label="姓名"
-                  name="alcName"
-                  rules={[{ required: true, message: '请输入姓名' }]}>
-                  <Input />
-                </Form.Item>
-              </Col>
-              <Col span={10} offset={2}>
-                <Form.Item label="工作单位" name="alcWorkUnit">
-                  <Input />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={10}>
-                <Form.Item label="证件名称" name="alcCertType">
-                  <Select defaultValue="身份证">
-                    <Select.Option value="身份证">身份证</Select.Option>
-                  </Select>
-                </Form.Item>
-              </Col>
-              <Col span={10} offset={2}>
-                <Form.Item
-                  label="证件号码"
-                  name="alcCertCode"
-                  rules={[{ required: true, message: '请输入证件号码' }]}>
-                  <Input />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={10}>
-                <Form.Item
-                  label="证件扫描件或照片"
-                  name="alcAttachmentFront"
-                  rules={[{ required: true, message: '请上传身份证正面文件' }]}>
-                  <Upload {...this.genUploadProps('Front')} fileList={this.state.fileListFront}>
-                    <Button
-                      disabled={this.state.fileListFront.length > 0}
-                      icon={<UploadOutlined />}>
-                      请上传身份证正面文件
-                    </Button>
-                  </Upload>
-                </Form.Item>
-              </Col>
-              <Col span={10} offset={2}>
-                <Form.Item
-                  label=" "
-                  required={false}
-                  colon={false}
-                  name="alcAttachmentReide"
-                  rules={[{ required: true, message: '请上传身份证反面文件' }]}>
-                  <Upload {...this.genUploadProps('Reide')} fileList={this.state.fileListReide}>
-                    <Button
-                      disabled={this.state.fileListReide.length > 0}
-                      icon={<UploadOutlined />}>
-                      请上传身份证反面文件
-                    </Button>
-                  </Upload>
-                </Form.Item>
-              </Col>
-            </Row>
+            {/* 公民相关 */}
+            {this.state.currentAlcType === CURRENTALCTYPE[0] ? (
+              <React.Fragment>
+                <Row>
+                  <Col span={10}>
+                    <Form.Item
+                      label="姓名"
+                      name="alcName"
+                      rules={[{ required: true, message: '请输入姓名' }]}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  <Col span={10} offset={2}>
+                    <Form.Item label="工作单位" name="alcWorkUnit">
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={10}>
+                    <Form.Item label="证件名称" name="alcCertType">
+                      <Select defaultValue="身份证">
+                        <Select.Option value="身份证">身份证</Select.Option>
+                      </Select>
+                    </Form.Item>
+                  </Col>
+                  <Col span={10} offset={2}>
+                    <Form.Item
+                      label="证件号码"
+                      name="alcCertCode"
+                      rules={[{ required: true, message: '请输入证件号码' }]}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={10}>
+                    <Form.Item
+                      label="证件扫描件或照片"
+                      name="alcAttachmentFront"
+                      rules={[{ required: true, message: '请上传身份证正面文件' }]}>
+                      <Upload {...this.genUploadProps('Front')} fileList={this.state.fileListFront}>
+                        <Button
+                          disabled={this.state.fileListFront.length > 0}
+                          icon={<UploadOutlined />}>
+                          请上传身份证正面文件
+                        </Button>
+                      </Upload>
+                    </Form.Item>
+                  </Col>
+                  <Col span={10} offset={2}>
+                    <Form.Item
+                      label=" "
+                      required={false}
+                      colon={false}
+                      name="alcAttachmentReide"
+                      rules={[{ required: true, message: '请上传身份证反面文件' }]}>
+                      <Upload {...this.genUploadProps('Reide')} fileList={this.state.fileListReide}>
+                        <Button
+                          disabled={this.state.fileListReide.length > 0}
+                          icon={<UploadOutlined />}>
+                          请上传身份证反面文件
+                        </Button>
+                      </Upload>
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </React.Fragment>
+            ) : null}
+            {/* 法人或者其他组织 */}
+            {this.state.currentAlcType === CURRENTALCTYPE[1] ? (
+              <React.Fragment>
+                <Row>
+                  <Col span={10}>
+                    <Form.Item
+                      label="组织机构代码"
+                      name="alcOrganizationCode"
+                      rules={[{ required: true, message: '请输入组织机构代码' }]}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  <Col span={10} offset={2}>
+                    <Form.Item
+                      label="营业执照代码"
+                      name="alcLicenseCode"
+                      rules={[{ required: true, message: '请输入营业执照代码' }]}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={10}>
+                    <Form.Item label="法人代表" name="alcLegal">
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  <Col span={10} offset={2}>
+                    <Form.Item label="联系人" name="alcContacts">
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={10}>
+                    <Form.Item
+                      label="法人证件扫描件或照片"
+                      name="alcAttachmentScanning"
+                      rules={[{ required: true, message: '请上传法人证件扫描件或照片' }]}>
+                      <Upload
+                        {...this.genUploadProps('Scanning')}
+                        fileList={this.state.fileListScanning}>
+                        <Button
+                          disabled={this.state.fileListScanning.length > 0}
+                          icon={<UploadOutlined />}>
+                          请上传证件正面文件
+                        </Button>
+                      </Upload>
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </React.Fragment>
+            ) : null}
             <Row>
               <Col span={10}>
                 <Form.Item label="联系电话" name="alcTelPhone">
@@ -379,11 +498,13 @@ class Application extends React.Component<ApplicationProps, ApplicationState> {
             </Row>
           </>
         )}
-        <Form.Item wrapperCol={{ offset: 11, span: 16 }} style={{ marginTop: 20 }}>
-          <Button type="primary" htmlType="submit">
-            提交
-          </Button>
-        </Form.Item>
+        {this.state.shouldRenderForm ? (
+          <Form.Item wrapperCol={{ offset: 11, span: 16 }} style={{ marginTop: 20 }}>
+            <Button type="primary" htmlType="submit">
+              提交
+            </Button>
+          </Form.Item>
+        ) : null}
       </Form>
     )
     return this.renderRow('form', content)
@@ -402,6 +523,16 @@ class Application extends React.Component<ApplicationProps, ApplicationState> {
             {this.renderForm()}
           </section>
         </Block.Center>
+        <FooterRow
+          renderSubImg={() => (
+            <a
+              href="https://zfwzzc.www.gov.cn/check_web/errorInfo/jcInfo/70f4f603-2380-409f-928e-c88a78664923-2293780979"
+              target="_blank"
+              rel="noreferrer">
+              <img src={pickerrorImg} style={{ width: 110, height: 55 }} />
+            </a>
+          )}
+        />
       </div>
     )
   }

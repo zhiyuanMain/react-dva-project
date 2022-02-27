@@ -13,6 +13,13 @@ export interface SendApplicationReqParams {
   alcMail: string // 电子邮箱
   alcAddress: string // 通讯地址
   alcPostcode: string // 邮政编码
+
+  alcOrganizationCode: string // 组织机构代码
+  alcLicenseCode: string // 营业执照代码
+  alcLegal: string // 法人代表
+  alcContacts: string // 联系人
+  alcAttachmentScanning: string // 法人证件扫描件或照片
+
   infoDesc: string // 所需信息描述
   infoTarget: string // 用途描述
   infoPublic: string // 是否公开
@@ -23,10 +30,10 @@ export const req = (data: SendApplicationReqParams) => {
   return requestProxy<any>({
     method: 'post',
     filter: false,
-    url: '/according2application',
+    url: '/yihegui/yihegui.jsp',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     },
-    data: { ...data }
+    data
   })
 }

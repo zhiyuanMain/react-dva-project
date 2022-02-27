@@ -5,6 +5,7 @@ import './FooterRow.less'
 
 interface FooterRowProps {
   prefixCls?: string
+  renderSubImg?: () => React.ReactNode
 }
 class FooterRow extends React.Component<FooterRowProps, {}> {
   constructor(props: FooterRowProps | Readonly<FooterRowProps>) {
@@ -16,7 +17,7 @@ class FooterRow extends React.Component<FooterRowProps, {}> {
   }
 
   renderLeft = () => {
-    const { prefixCls } = this.props
+    const { prefixCls, renderSubImg } = this.props
     const wrapCls = `${prefixCls}__left`
 
     return (
@@ -27,6 +28,8 @@ class FooterRow extends React.Component<FooterRowProps, {}> {
           rel="noreferrer">
           <img src={require('src/assets/img/type.png')} />
         </a>
+        {typeof renderSubImg === 'function' ? renderSubImg() : null}
+
         <article>
           <address>地址：陕西省榆林市榆阳区榆林大道158号 主办单位: 榆林市农业农村局</address>
           <p>
