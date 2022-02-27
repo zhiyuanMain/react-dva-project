@@ -58,119 +58,66 @@ class StaticRenderApplication extends React.Component<
       <div className={prefixCls}>
         <RenderContent type="title" content="依申请公开信息说明" />
         <section className={`${prefixCls}__showbox`}>
-          <RenderContent type="subtitle" content="一、受理依据" />
           <RenderContent
-            type="article"
-            content="（一）按照《中华人民共和国政府信息公开条例》（以下简称《条例》）的有关规定，您可以在本栏目向本机关申请获取市政府或市政府办公室制作或保存的政府信息。"
+            type="subtitle"
+            content="公民、法人或者其他组织可根据自身生产、生活、科研等特殊需要，向榆林市农业农村局申请获取主动公开以外的政府信息。依据《中华人民共和国政府信息公开条例》精神，行政机关一般不承担为申请人汇总、加工或重新制作政府信息，以及向其他行政机关和公民、法人或者其他组织搜集信息的义务。"
           />
-          <RenderContent type="article" content="（二）申请公开的信息类型：" />
-          <RenderContent type="article" content="1、应主动公开而没有公开的政府信息；" />
-          <RenderContent type="article" content="主动公开的信息包括：" />
-          <RenderContent type="article" content="（1)行政法规、规章和规范性文件；" />
+          <RenderContent type="article" content="一、受理机构" />
           <RenderContent
             type="article"
-            content="（2)机关职能、机构设置、办公地址、办公时间、联系方式、负责人姓名；"
+            content="榆林市农业农村局受理政府信息公开申请机构为榆林市农业农村局政秘科。"
           />
           <RenderContent
             type="article"
-            content="（3)国民经济和社会发展规划、专项规划、区域规划及相关政策；"
+            content="办公时间：上午8：00-12：00，下午14：00-17：30（7月1日至8月31日下午15：00-18：00，法定节假日除外）。"
           />
           <RenderContent
             type="article"
-            content="（3)国民经济和社会发展规划、专项规划、区域规划及相关政策；"
-          />
-          <RenderContent type="article" content="（4)国民经济和社会发展统计信息；" />
-          <RenderContent
-            type="article"
-            content="（5)办理行政许可和其他对外管理服务事项的依据、条件、程序以及办理结果；"
+            content="办公地址：陕西省榆林市榆阳区榆林大道158号农业大厦四楼。"
           />
           <RenderContent
             type="article"
-            content="（6)实施行政处罚、行政强制的依据、条件、程序以及本行政机关认为具有一定社会影响的行政处罚决定；"
+            content="通讯地址：陕西省榆林市榆阳区榆林大道158号农业大厦"
           />
-          <RenderContent type="article" content="（7)财政预算、决算信息；" />
-          <RenderContent type="article" content="（8)行政事业性收费项目及其依据、标准；" />
-          <RenderContent type="article" content="（9)政府集中采购项目的目录、标准及实施情况；" />
-          <RenderContent type="article" content="（10)重大建设项目的批准和实施情况；" />
+          <RenderContent type="article" content="邮编：719000" />
+          <RenderContent type="article" content="电话：0912--6662688" />
+          <RenderContent type="article" content="传真：0912—6662688" />
+          <RenderContent type="article" content="二、申请步骤" />
+          <RenderContent type="article" content="（一）提交申请" />
           <RenderContent
             type="article"
-            content="（11)扶贫、教育、医疗、社会保障、促进就业等方面的政策、措施及其实施况；"
-          />
-          <RenderContent
-            type="article"
-            content="（12)突发公共事件的应急预案、预警信息及应对情况；"
+            content="申请人填写《榆林市农业农村局依申请公开政府信息申请表》（以下简称《申请表》），提出申请；也可以在我局门户网站进行网上申请。《申请表》可以从本局门户网站下载，也可以到本局政府信息公开工作办公室（政秘科）领取。《申请表》应填写完整，内容真实有效。"
           />
           <RenderContent
             type="article"
-            content="（13)环境保护、公共卫生、安全生产、食品药品、产品质量的监督检查情况；"
+            content="申请人应出示有效身份证明，提交身份证明复印件，并对申请材料的真实性负责；对所需信息描述详尽、准确，尽可能提供该信息的标题、发布时间、文号或者其他有助于确定信息载体的提示。"
+          />
+          <RenderContent type="article" content="（二）申请方式" />
+          <RenderContent
+            type="article"
+            content="公民、法人或者其他组织可采用书面形式（包括数据电文形式）向榆林市农业农村局申请获取政府信息。采用书面形式确有困难的，申请人可口头提出，由受理机构代为填写政府信息公开申请。申请人可现场递交申请，也可通过信函、传真、电子邮件等方式递交填写完整的《申请表》。通过信函方式提出申请的，采用特快专递或挂号信方式投寄，并在信封左下角注明“政府信息公开申请”字样；通过传真方式提出申请的，请在传真左上角注明“政府信息公开申请”字样；通过电子邮件方式提出申请的，请在邮件主题中注明“政府信息公开申请”字样，邮箱地址：647247781@qq.com；申请人也可通过市农业农村局门户网站，在政府信息公开栏目下“依申请公开”子栏目里填写有关信息后进行网上申请。"
+          />
+          <RenderContent type="article" content="（三）受理程序" />
+          <RenderContent
+            type="article"
+            content="榆林市农业农村局收到《申请表》或网上申请后，按程序进行审查。"
           />
           <RenderContent
             type="article"
-            content="（14)公务员招考的职位、名额、报考条件等事项以及录用结果；"
+            content="对申请信息填写完整且有关证明材料齐全的申请正式登记受理。能够当场答复的，当场予以答复；不能当场答复的，自收到申请（指可以正式受理的申请）之日起20个工作日内予以答复。需延长答复期限的，书面告知申请人，延长答复的期限最长不超过20个工作日。申请公开的政府信息涉及第三方权益的，榆林市农业农村局征求第三方意见所需时间不计算在上述规定期限内。"
           />
           <RenderContent
             type="article"
-            content="（15)市政建设、公共服务、公益事业、土地征收、房屋征收、治安管理、社会救助等方面的政府信息；"
+            content="对申请信息填写不完整、内容不明确或未按要求提供有关证明材料的申请，将要求补充或更正。如申请公开的政府信息不存在或者不属于公开范围的，应书面说明不予公开的理由。"
           />
+          <RenderContent type="article" content="三、不予公开的政府信息" />
+          <RenderContent type="article" content="1.属于国家秘密的；" />
+          <RenderContent type="article" content="2.属于工作秘密、内部资料和个人隐私的；" />
           <RenderContent
             type="article"
-            content="（16)法律、法规、规章和国家有关规定规定应当主动公开的其他政府信息。"
+            content="3.在未作出具体行政行为之前予以公开，可能影响国家利益、公共利益和执法活动的；"
           />
-          <RenderContent
-            type="article"
-            content="２、其它政府信息（包括与申请者本人相关的政府信息）。"
-          />
-          <RenderContent type="article" content="（三）不予公开的政府信息：" />
-          <RenderContent type="article" content="1、国家秘密；" />
-          <RenderContent
-            type="article"
-            content="2、法律、行政法规禁止公开的政府信息，以及公开后可能危及国家安全、公共安全、经济安全、社会稳定的政府信息；"
-          />
-          <RenderContent
-            type="article"
-            content="3、涉及商业秘密、个人隐私等公开会对第三方合法权益造成损害的政府信息；"
-          />
-          <RenderContent
-            type="article"
-            content="4、行政机关的内部事务信息，包括人事管理、后勤管理、内部工作流程等方面的信息；"
-          />
-          <RenderContent
-            type="article"
-            content="5、行政机关在履行行政管理职能过程中形成的讨论记录、过程稿、磋商信函、请示报告等过程性信息以及行政执法案卷信息。"
-          />
-          <RenderContent type="subtitle" content="二、申请公开受理流程" />
-          <RenderContent type="subtitle" content="三、说明" />
-          <RenderContent
-            type="article"
-            content="（一）根据《条例》及相关规定，我市政府及政府办公室已主动公开大量政府信息。建议您在填写政府信息公开申请表之前，先通过市政府门户网站使用检索功能进行查找。如果没有查询到所需的政府信息，请您提交政府信息公开申请；"
-          />
-          <RenderContent
-            type="article"
-            content="（二）本平台仅受理政府信息公开事宜。涉及到信访、投诉、举报等问题，请通过市政府门户网站“网上信访”、“市长信箱”、“咨询投诉”等栏目或者纪检渠道反映。 "
-          />
-          <RenderContent
-            type="article"
-            content="（三）申请公开的政府信息，应该是已制作或者获取的信息，不包括需要进行加工、分析的政府信息。 "
-          />
-          <RenderContent
-            type="article"
-            content="（四）为提高工作效率，方便申请人尽快获取所申请公开的信息，请采取“一事一申请”方式提出，即一个政府信息公开申请只对应一个政府信息项目。 "
-          />
-          <RenderContent
-            type="article"
-            content="（五）申请公开的政府信息的内容描述应当明确需要获取的政府信息的名称、文号或者便于行政机关查询的其他特征性描述，尽量避免使用如XXX等信息、XXX所有信息、XXX相关信息等模糊性描述。 "
-          />
-          <RenderContent
-            type="article"
-            content="（六）本机关已就申请人提出的政府信息公开申请作出答复、申请人重复申请公开相同政府信息的，不予重复处理； "
-          />
-          <RenderContent
-            type="article"
-            content="（七）本机关自收到《申请表》之日起20个工作日内予以答复，需要延长答复期限的，经本机关负责人同意并将告知申请人，延长的期限最长不超过20个工作日。 "
-          />
-          <RenderContent type="article" content="（八）附件下载：" />
-          <RenderContent type="article" content="1.受理依申请政府信息公开表格下载.doc " />
-          <RenderContent type="article" content="咨询电话：0912-3895356 （可传真）" />
+          <RenderContent type="article" content="4.法律、法规和规章规定免予公开的其他政府信息。" />
         </section>
         <section className={`${prefixCls}__linkrow`}>
           <Button type="primary" disabled={currentCount > 0}>
