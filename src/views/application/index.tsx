@@ -374,7 +374,7 @@ class Application extends React.Component<ApplicationProps, ApplicationState> {
                 <Row>
                   <Col span={10}>
                     <Form.Item
-                      label="法人证件扫描件或照片"
+                      label="法人证件"
                       name="alcAttachmentScanning"
                       rules={[{ required: true, message: '请上传法人证件扫描件或照片' }]}>
                       <Upload
