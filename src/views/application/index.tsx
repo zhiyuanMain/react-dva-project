@@ -238,7 +238,7 @@ class Application extends React.Component<ApplicationProps, ApplicationState> {
     const content = (
       <dl>
         <dt>温馨提示： </dt>
-        <dd>1.本栏目仅受理向榆林市人民</dd>
+        <dd>1.本栏目仅受理向榆林市农业农村局依申请公开政府信息</dd>
         <dd>
           2.建议您在填写依申请公开政府信息之前，先通过"网站搜索"进行查询。谢谢您的支持和配合！
         </dd>
