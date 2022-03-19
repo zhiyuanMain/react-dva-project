@@ -20,8 +20,6 @@ import { Block } from 'src/components'
 import './index.less'
 import gateway from 'src/services/gateway'
 import { SendApplicationReqParams } from 'src/services/gateway/sendApplication'
-import FooterRow from '../dashboard/components/FooterRow'
-import pickerrorImg from 'src/assets/img/pickerror.png'
 
 const BREADCRUMBLIST: BreadcrumbListItem[] = [
   { title: '首页', path: '/', category: 'link' },
@@ -523,16 +521,6 @@ class Application extends React.Component<ApplicationProps, ApplicationState> {
             {this.renderForm()}
           </section>
         </Block.Center>
-        <FooterRow
-          renderSubImg={() => (
-            <a
-              href="https://zfwzzc.www.gov.cn/check_web/errorInfo/jcInfo/70f4f603-2380-409f-928e-c88a78664923-2293780979"
-              target="_blank"
-              rel="noreferrer">
-              <img src={pickerrorImg} style={{ width: 110, height: 55 }} />
-            </a>
-          )}
-        />
       </div>
     )
   }

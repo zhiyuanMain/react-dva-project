@@ -3,6 +3,7 @@ import LogoRow from '../components/LogoRow'
 import HeaderRow from '../components/HeaderRow'
 import NavRow from '../components/NavRow'
 import './index.less'
+import FooterRow from 'src/views/dashboard/components/FooterRow'
 
 interface BasicLayoutProps {
   prefixCls?: string
@@ -44,6 +45,7 @@ class BasicLayout extends React.Component<BasicLayoutProps, {}> {
         {this.renderBgImg()}
         {this.renderHeader()}
         <div className={`${prefixCls}__main`}>{children}</div>
+        <FooterRow />
       </div>
     )
   }

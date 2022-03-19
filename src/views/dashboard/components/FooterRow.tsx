@@ -1,11 +1,11 @@
 import { Popover } from 'antd'
 import React from 'react'
 import { Block } from 'src/components'
+import pickerrorImg from 'src/assets/img/pickerror.png'
 import './FooterRow.less'
 
 interface FooterRowProps {
   prefixCls?: string
-  renderSubImg?: () => React.ReactNode
 }
 class FooterRow extends React.Component<FooterRowProps, {}> {
   constructor(props: FooterRowProps | Readonly<FooterRowProps>) {
@@ -17,7 +17,7 @@ class FooterRow extends React.Component<FooterRowProps, {}> {
   }
 
   renderLeft = () => {
-    const { prefixCls, renderSubImg } = this.props
+    const { prefixCls } = this.props
     const wrapCls = `${prefixCls}__left`
 
     return (
@@ -28,8 +28,12 @@ class FooterRow extends React.Component<FooterRowProps, {}> {
           rel="noreferrer">
           <img src={require('src/assets/img/type.png')} />
         </a>
-        {typeof renderSubImg === 'function' ? renderSubImg() : null}
-
+        <a
+          href="https://zfwzzc.www.gov.cn/check_web/errorInfo/jcInfo/70f4f603-2380-409f-928e-c88a78664923-2293780979"
+          target="_blank"
+          rel="noreferrer">
+          <img src={pickerrorImg} style={{ width: 110, height: 55 }} />
+        </a>
         <article>
           <address>地址：陕西省榆林市榆阳区榆林大道158号 主办单位: 榆林市农业农村局</address>
           <p>

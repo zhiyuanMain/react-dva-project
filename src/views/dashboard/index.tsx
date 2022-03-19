@@ -1,7 +1,6 @@
 import React from 'react'
 import BannerRow from './components/BannerRow'
 import SwiperRow from './components/SwiperRow'
-import FooterRow from './components/FooterRow'
 import GroupRow from './components/GroupRow'
 import LinkRow from './components/LinkRow'
 import OnlineRow from './components/OnlineRow'
@@ -27,7 +26,6 @@ class Dashboard extends React.Component<DashboardProps, {}> {
         <GroupRow />
         <OnlineRow />
         <LinkRow />
-        <FooterRow />
       </div>
     )
   }
