@@ -5,6 +5,8 @@ import './BannerRow.less'
 import { convertLinkData, TabItem } from 'src/components/tab-box'
 import gateway from 'src/services/gateway'
 import { Link } from 'dva/router'
+import bannerImg from 'src/assets/img/banner-img.jpg'
+import moment from 'moment'
 interface BannerRowProps {
   prefixCls?: string
 }
@@ -90,6 +92,21 @@ class BannerRow extends React.Component<BannerRowProps, BannerRowState> {
     )
   }
 
+  renderImg = () => {
+    const { prefixCls } = this.props
+    const wrapCls = `${prefixCls}__img`
+    const today = moment(new Date())
+    const endday = moment(new Date('2022-8-7'))
+    const diff = endday.diff(today, 'days')
+    if (diff <= 0) return null
+    return (
+      <a className={wrapCls} target="_blank" href="https://17.ylrb.com/" rel="noreferrer">
+        <img src={bannerImg} />
+        <span>{diff}</span>
+      </a>
+    )
+  }
+
   render() {
     const { prefixCls } = this.props
     return (
@@ -97,6 +114,7 @@ class BannerRow extends React.Component<BannerRowProps, BannerRowState> {
         <Block.Center>
           {this.renderLeft()}
           {this.renderRight()}
+          {this.renderImg()}
         </Block.Center>
       </div>
     )
