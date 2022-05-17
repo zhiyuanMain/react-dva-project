@@ -129,7 +129,9 @@ class BannerRow extends React.Component<BannerRowProps, BannerRowState> {
             })
           }}
         />
-        <img src={require('src/assets/img/banner-legal.jpg')} />
+        <a href="http://www.wenming.cn/specials/zxdj/hxjz/tsjzg/" target="_blank" rel="noreferrer">
+          <img src={require('src/assets/img/banner-legal.jpg')} />
+        </a>
       </section>
     )
   }
