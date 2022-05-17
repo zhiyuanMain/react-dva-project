@@ -7,6 +7,7 @@ import gateway from 'src/services/gateway'
 import { Link } from 'dva/router'
 import bannerImg from 'src/assets/img/banner-img.jpg'
 import moment from 'moment'
+import { PlusCircleOutlined } from '@ant-design/icons'
 interface BannerRowProps {
   prefixCls?: string
 }
@@ -15,6 +16,7 @@ interface BannerRowState {
   currentCarouselIdx: number
   bannerList: api.BannerList
   newsList: TabItem[]
+  legalimgVisible: boolean
 }
 class BannerRow extends React.Component<BannerRowProps, BannerRowState> {
   constructor(props: BannerRowProps | Readonly<BannerRowProps>) {
@@ -28,7 +30,8 @@ class BannerRow extends React.Component<BannerRowProps, BannerRowState> {
   state: BannerRowState = {
     currentCarouselIdx: 1,
     bannerList: [],
-    newsList: []
+    newsList: [],
+    legalimgVisible: true
   }
 
   componentDidMount() {
@@ -107,11 +110,36 @@ class BannerRow extends React.Component<BannerRowProps, BannerRowState> {
     )
   }
 
+  renderLegalimg = () => {
+    const { prefixCls } = this.props
+    const wrapCls = `${prefixCls}__legalimg`
+    if (!this.state.legalimgVisible) return null
+    return (
+      <section className={wrapCls}>
+        <PlusCircleOutlined
+          style={{
+            color: '#383d42',
+            transform: 'rotateZ(45deg)',
+            paddingRight: 4,
+            cursor: 'pointer'
+          }}
+          onClick={() => {
+            this.setState({
+              legalimgVisible: false
+            })
+          }}
+        />
+        <img src={require('src/assets/img/banner-legal.jpg')} />
+      </section>
+    )
+  }
+
   render() {
     const { prefixCls } = this.props
     return (
       <div className={prefixCls}>
         <Block.Center>
+          {this.renderLegalimg()}
           {this.renderLeft()}
           {this.renderRight()}
           {this.renderImg()}
