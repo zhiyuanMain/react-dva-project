@@ -350,9 +350,9 @@ class Application extends React.Component<ApplicationProps, ApplicationState> {
                   </Col>
                   <Col span={10} offset={2}>
                     <Form.Item
-                      label="营业执照代码"
+                      label="组织机构名称"
                       name="alcLicenseCode"
-                      rules={[{ required: true, message: '请输入营业执照代码' }]}>
+                      rules={[{ required: true, message: '请输入组织机构名称' }]}>
                       <Input />
                     </Form.Item>
                   </Col>
