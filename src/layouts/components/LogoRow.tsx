@@ -50,6 +50,12 @@ class LogoRow extends React.Component<LogoRowProps, {}> {
             <img src={nationalEmblem} className={`${prefixCls}__national`} />
             <img src={logo} className={`${prefixCls}__logo`} />
           </Link>
+          <a
+            target="_blank"
+            href="http://www.gov.cn/zhuanti/zggcddescqgdbdh/index.htm"
+            rel="noreferrer">
+            <img src="http://www.gov.cn/govweb/xhtml/2019zhuanti/20thCPCNationalCongress/images/danghuiicon.png" />
+          </a>
           {this.renderSearch()}
         </Block.Center>
       </div>

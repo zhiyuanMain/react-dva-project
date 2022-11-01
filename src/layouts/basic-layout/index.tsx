@@ -22,7 +22,13 @@ class BasicLayout extends React.Component<BasicLayoutProps, {}> {
     const { prefixCls } = this.props
     const wrapCls = `${prefixCls}__bgimg`
 
-    return <img className={wrapCls} src={require('../../assets/img/dashboard-bg.png')} />
+    // return <img className={wrapCls} src={require('../../assets/img/dashboard-bg.png')} />
+    return (
+      <img
+        className={wrapCls}
+        src="http://www.gov.cn/govweb/xhtml/2019zhuanti/20thCPCNationalCongress/images/ershidasybg.jpg"
+      />
+    )
   }
 
   renderHeader = () => {
