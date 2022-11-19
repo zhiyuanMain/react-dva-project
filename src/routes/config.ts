@@ -76,6 +76,16 @@ const allRoutes: RouteItem[] = [
         )
       }
     ]
+  },
+  {
+    layout: 'blank',
+    routes: [
+      {
+        title: 'share',
+        path: '/share',
+        component: React.lazy(() => import(/* webpackChunkName: "page-share" */ '../views/share'))
+      }
+    ]
   }
 ]
 

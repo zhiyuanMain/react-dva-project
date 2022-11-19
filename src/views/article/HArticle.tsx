@@ -1,4 +1,4 @@
-import { Breadcrumb, Spin } from 'antd'
+import { Breadcrumb, Button, Spin, Tooltip } from 'antd'
 import classNames from 'classnames'
 import { Link } from 'dva/router'
 import React from 'react'
@@ -163,6 +163,20 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
     containerMain?.appendChild(documentFragment)
   }
 
+  // 分享
+  handleShare = (type: 'wechat' | 'weibo') => {
+    if (type === 'wechat') {
+      window.open(`/#/share?url=${encodeURIComponent(window.location.href)}`)
+    }
+    if (type === 'weibo') {
+      window.open(
+        `https://service.weibo.com/share/share.php?url=${encodeURIComponent(
+          window.location.href
+        )}&title=${this.state.title}`
+      )
+    }
+  }
+
   renderRow = (rowCls: string, content: React.ReactNode) => {
     const { prefixCls, id } = this.props
     const { voteRef, title } = this.state
@@ -213,10 +227,29 @@ class HArticle extends React.Component<HArticleProps, HArticleState> {
         endTime={endTime}></HVotes.Breadcrumb>
     ) : (
       <React.Fragment>
-        <span>{info.time}</span>
-        <span>点击：{info.count}</span>
-        <span>来源：{info.src}</span>
-        {info.author ? <span>作者：{info.author}</span> : null}
+        <section>
+          <span>{info.time}</span>
+          <span>点击：{info.count}</span>
+          <span>来源：{info.src}</span>
+          {info.author ? <span>作者：{info.author}</span> : null}
+        </section>
+        <section>
+          <Button.Group>
+            <Button className="share">
+              <img src={require('../../assets/img/share.svg')} />
+            </Button>
+            <Tooltip title="微信">
+              <Button className="svg" onClick={() => this.handleShare('wechat')}>
+                <img src={require('../../assets/img/wechat.svg')} />
+              </Button>
+            </Tooltip>
+            <Tooltip title="微博">
+              <Button className="svg" onClick={() => this.handleShare('weibo')}>
+                <img src={require('../../assets/img/weibo.svg')} />
+              </Button>
+            </Tooltip>
+          </Button.Group>
+        </section>
       </React.Fragment>
     )
     return this.renderRow('info', content)
